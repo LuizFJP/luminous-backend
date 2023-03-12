@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private UserService userService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    @RequestMapping(path = "",
+            method = RequestMethod.GET)
     public ResponseEntity<String> teste() {
         return new ResponseEntity<String>("Deu certo", HttpStatus.CREATED);
     }
