@@ -1,57 +1,43 @@
 package com.br.luminous.configuration;
 
-import com.br.luminous.repository.UserRepository;
-import com.br.luminous.service.UserDetailService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
+@EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfiguration {
-    private UserDetailService userDetailService;
+
+    private AuthenticationProvider authenticationProvider;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(
-                        (form) -> form
-                        .loginPage("/login")
-                                .usernameParameter("email")
-                                .permitAll()
-                )
-                .logout((logout) -> logout.permitAll()
-                )
-                .httpBasic(withDefaults())
-                .csrf().disable();
+                .logout((logout) -> logout
+                        .logoutUrl("/api/auth/logout")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                                var a = SecurityContextHolder.getContext();
+
+                                SecurityContextHolder.clearContext();
+                        }
+                ))
+                .authenticationProvider(authenticationProvider)
+                .csrf().disable()
+                .httpBasic();
 
         return http.build();
-    }
-
-    @Bean
-    public AuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider =
-                new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder());
-        provider.setUserDetailsService(userDetailService);
-        return provider;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }

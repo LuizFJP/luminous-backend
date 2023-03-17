@@ -14,14 +14,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private UserRepository userRepository;
-
-    public Long create(UserRequest userRequest) {
-        var user = new User();
-        BeanUtils.copyProperties(userRequest, user);
-        User response = userRepository.save(user);
-        return response.getId();
-    }
-
     public void update(Long id, UserRequest userRequest) {
         try {
             User user = getUserById(id);
