@@ -12,11 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "tokens")
 public class Token {
 
     @Id
     @GeneratedValue
-    public Integer id;
+    public Long id;
 
     @Column(unique = true)
     public String token;

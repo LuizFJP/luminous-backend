@@ -26,11 +26,11 @@ public class AuthenticationController {
         return new ResponseEntity<AuthenticationResponse>(service.register(request), HttpStatus.CREATED);
     }
     @PostMapping("/authenticate")
-    public ResponseEntity authenticate(
+    public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
-        service.authenticate(request);
-        return new ResponseEntity(HttpStatus.OK);
+        var jwtToken = service.authenticate(request);
+        return new ResponseEntity<AuthenticationResponse>(jwtToken, HttpStatus.OK);
     }
 
 }
