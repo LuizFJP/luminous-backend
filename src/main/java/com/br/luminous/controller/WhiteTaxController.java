@@ -20,9 +20,9 @@ public class WhiteTaxController {
     private WhiteTaxService whiteTaxService;
 
     @GetMapping("/")
-    public ResponseEntity<List<WhiteTax>> getWhiteTaxes() {
+    public ResponseEntity<List<WhiteTaxDTO>> getWhiteTaxes() {
         var response = whiteTaxService.getAll();
-        return new ResponseEntity<List<WhiteTax>>(
+        return new ResponseEntity<List<WhiteTaxDTO>>(
                response , HttpStatus.OK);
     }
 

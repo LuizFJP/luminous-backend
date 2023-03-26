@@ -16,13 +16,13 @@ public class WhiteTax  implements Serializable {
     @Column(name = "company_name")
     private String companyName;
     @Column(name = "regular_price")
-    private String regularPrice;
+    private float regularPrice;
     @Column(name = "low_price")
-    private String lowPrice;
+    private float lowPrice;
     @Column(name = "middle_price")
-    private String middlePrice;
+    private float middlePrice;
     @Column(name = "high_price")
-    private String highPrice;
+    private float highPrice;
     @Column(name = "start_hour_low_price", columnDefinition = "TIME")
     private LocalTime startHourLowPrice;
     @Column(name = "end_hour_low_price", columnDefinition = "TIME")

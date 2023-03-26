@@ -13,11 +13,11 @@ import java.time.LocalTime;
 public class WhiteTaxDTO {
     private String companyName;
     @Column(name = "regular_price")
-    private String regularPrice;
+    private float regularPrice;
     @Column(name = "low_price")
-    private String lowPrice;
-    private String middlePrice;
-    private String highPrice;
+    private float lowPrice;
+    private float middlePrice;
+    private float highPrice;
     private LocalTime startHourLowPrice;
     private LocalTime endHourLowPrice;
     private LocalTime initialStartHourMiddlePrice;
@@ -26,5 +26,5 @@ public class WhiteTaxDTO {
     private LocalTime finalEndHourMiddlePrice;
     private LocalTime startHourHighPrice;
     private LocalTime endHourHighPrice;
-
+    private float save;
 }

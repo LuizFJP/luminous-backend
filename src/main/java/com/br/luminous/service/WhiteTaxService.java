@@ -2,6 +2,7 @@ package com.br.luminous.service;
 
 import com.br.luminous.DTO.WhiteTaxDTO;
 import com.br.luminous.entity.WhiteTax;
+import com.br.luminous.mapper.WhiteTaxToWhiteTaxDTO;
 import com.br.luminous.repository.WhiteTaxRepository;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WhiteTaxService {
     private final WhiteTaxRepository whiteTaxRepository;
+    private final WhiteTaxToWhiteTaxDTO whiteTaxMapper;
 
-    public List<WhiteTax> getAll() {
-        return whiteTaxRepository.findAll();
+    public List<WhiteTaxDTO> getAll() {
+        return whiteTaxMapper.mapper(whiteTaxRepository.findAll());
     }
 }
