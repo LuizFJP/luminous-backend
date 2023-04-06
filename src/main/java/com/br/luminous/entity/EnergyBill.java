@@ -14,7 +14,7 @@ public class EnergyBill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDate referenceMonth;
+    private LocalDate referenceDate;
     private LocalDate dueDate;
     private Double energyConsumptionReais;
     private int energyConsumptionkWh;
