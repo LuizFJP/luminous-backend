@@ -2,6 +2,7 @@ package com.br.luminous.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -23,5 +24,17 @@ public class Handler extends ResponseEntityExceptionHandler {
         body.put("time", new Date().toString());
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<Object> handleException(
+            AuthenticationException ex, WebRequest request) {
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", ex.getMessage());
+        body.put("returned", "Unauthorized data");
+        body.put("time", new Date().toString());
+
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 }
