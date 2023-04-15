@@ -1,7 +1,7 @@
 package com.br.luminous.controller;
 
-import com.br.luminous.entity.Residence;
-import com.br.luminous.service.ResidenceService;
+import com.br.luminous.entity.Address;
+import com.br.luminous.service.AddressService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/residence")
-public class ResidenceController {
+@RequestMapping("api/address")
+public class AddressController {
 
-    private ResidenceService residenceService;
+    private AddressService addressService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<String> teste() {
@@ -20,8 +20,8 @@ public class ResidenceController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createResidence(@RequestBody Residence residence){
-        Long id = residenceService.create(residence);
+    public ResponseEntity<Long> createAddress(@RequestBody Address address){
+        Long id = addressService.create(address);
         return new ResponseEntity<Long>(id, HttpStatus.CREATED);
     }
 

@@ -31,7 +31,7 @@ public class AuthenticationService {
         BeanUtils.copyProperties(userRequest, user);
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         User savedUser = userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(user, user.getId());
         saveUserToken(savedUser, jwtToken);
         return new AuthenticationResponse(jwtToken);
     }
@@ -46,7 +46,7 @@ public class AuthenticationService {
            );
            var user = userRepository.findByEmail(request.getEmail())
                    .orElseThrow();
-           var jwtToken = jwtService.generateToken(user);
+           var jwtToken = jwtService.generateToken(user, user.getId());
            revokeAllUserTokens(user);
            saveUserToken(user, jwtToken);
            return new AuthenticationResponse(jwtToken);
