@@ -26,16 +26,16 @@ public class WeatherTipService {
 
     private final RestTemplate restTemplate;
 
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final WeatherTipRepository weatherTipRepository;
 
     private final int SIXTEEN_DEGREES = 16;
 
-    public WeatherTipResponse getTip(String email) {
+    public WeatherTipResponse getTip(Long id) {
 
-//       var user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
-//       var city = user.getAddresses().get(0).getCity();
-        var city = "Ibirama";
+        var user = userService.getUserById(id);
+        var city = user.getAddresses().get(0).getCity();
+
         uri += "&q=" + city + ",br" + "&APPID=" + API_KEY;
 
         ResponseEntity<WeatherNotificationResponse> response = restTemplate.getForEntity(uri, WeatherNotificationResponse.class);
