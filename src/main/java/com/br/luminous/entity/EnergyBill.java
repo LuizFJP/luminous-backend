@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.time.LocalDate;
 
 @Data
@@ -17,7 +18,7 @@ public class EnergyBill {
     private LocalDate referenceDate;
     private LocalDate dueDate;
     private Double energyConsumptionReais;
-    private int energyConsumptionkWh;
-    private String bufferedBill;
+    private Double energyConsumptionkWh;
+    private String documentBill;
 
 }
