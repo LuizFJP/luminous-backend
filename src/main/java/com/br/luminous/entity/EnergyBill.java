@@ -3,8 +3,7 @@ package com.br.luminous.entity;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.*;
-import java.sql.Blob;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -18,7 +17,7 @@ public class EnergyBill {
     private LocalDate referenceDate;
     private LocalDate dueDate;
     private Double energyConsumptionReais;
-    private Double energyConsumptionkWh;
+    private Double energyConsumption_kWh;
     private String documentBill;
 
 }

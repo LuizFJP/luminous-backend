@@ -37,4 +37,22 @@ public class Handler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
+    @ExceptionHandler(TipNotFoundException.class)
+    public ResponseEntity<Object> handleTipNotFoundException(TipNotFoundException exception, WebRequest request){
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", exception.getMessage());
+        body.put("returned", exception.getCause());
+        body.put("time", new Date().toString());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(EnergyBillNotFoundException.class)
+    public ResponseEntity<Object> handleEnergyBillNotFoundException(EnergyBillNotFoundException exception, WebRequest request){
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", exception.getMessage());
+        body.put("returned", exception.getCause());
+        body.put("time", new Date().toString());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
 }
