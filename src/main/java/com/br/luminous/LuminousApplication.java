@@ -12,4 +12,6 @@ public class LuminousApplication {
 		SpringApplication.run(LuminousApplication.class, args);
 	}
 
-}
+	}
+
+
