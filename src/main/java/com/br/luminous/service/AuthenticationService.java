@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,24 +31,29 @@ public class AuthenticationService {
         BeanUtils.copyProperties(userRequest, user);
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         User savedUser = userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(user, user.getId());
         saveUserToken(savedUser, jwtToken);
         return new AuthenticationResponse(jwtToken);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
-        revokeAllUserTokens(user);
-        saveUserToken(user, jwtToken);
-        return new AuthenticationResponse(jwtToken);
+        try {
+           authenticationManager.authenticate(
+                   new UsernamePasswordAuthenticationToken(
+                           request.getEmail(),
+                           request.getPassword()
+                   )
+           );
+           var user = userRepository.findByEmail(request.getEmail())
+                   .orElseThrow();
+           var jwtToken = jwtService.generateToken(user, user.getId());
+           revokeAllUserTokens(user);
+           saveUserToken(user, jwtToken);
+           return new AuthenticationResponse(jwtToken);
+       } catch(AuthenticationException exception) {
+           throw exception;
+       }
+
     }
 
     private void saveUserToken(User user, String jwtToken) {

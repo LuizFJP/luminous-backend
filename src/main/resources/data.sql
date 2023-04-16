@@ -374,3 +374,16 @@ VALUES ('Amazonas Energia', 0.835, 0.709, 1.070, 1.615, '00:00:00', '18:30:00', 
 
        ('Neonergia Pernambuco', 0.706, 0.601, 0.932, 1.450, '21:30:00', '16:30:00', '16:30:00', '17:30:00', '17:30:00',
         '20:30:00', '20:30:00', '21:30:00');
+
+
+
+INSERT INTO weather_tips (tip, climate) VALUES
+                                            ('Desligue os ventiladores e ar-condicionado', 'COLD'),
+                                            ('Use roupas quentes para evitar ligar o aquecedor', 'COLD'),
+                                            ('Use cobertores eficientes para dormir', 'COLD'),
+                                            ('Sensação de frio aumentando? Exercite-se', 'COLD'),
+                                            ('Desligue os aquecedores', 'HOT'),
+                                            ('Use roupas mais leves', 'HOT'),
+                                            ('Evite o uso de chuveiro elétrico', 'HOT'),
+                                            ('Feche as cortinas para diminuir o aquecimento do ambiente', 'HOT'),
+                                            ('Abra as janelas para a entrada de ar fresco!', 'HOT');

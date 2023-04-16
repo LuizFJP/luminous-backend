@@ -14,5 +14,5 @@ public class UserResponse {
     private String phone;
     private String userName;
     private String email;
-    private LocalDate birthDate;
+    private LocalDate birthdate;
 }

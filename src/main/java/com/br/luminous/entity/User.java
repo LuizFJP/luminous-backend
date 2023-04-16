@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,13 +17,16 @@ import java.util.Collection;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="user_id")
     private Long id;
     private String name;
     private String phone;
     private String userName;
     private String email;
     private String password;
-    private LocalDate birthDate;
+    private LocalDate birthdate;
+    @OneToMany
+    private List<Address> addresses;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
