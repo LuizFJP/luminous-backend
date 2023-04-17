@@ -1,6 +1,6 @@
 package com.br.luminous.entity;
 import lombok.Data;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Data
@@ -11,7 +11,32 @@ public class Device {
     private Long Id;
     private String name;
     private float power;
-    private String usage_time;
-    private String category;
+    private String usageTime;
 
+    public Long getId() {
+        return Id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getPower() {
+        return power;
+    }
+
+    public void setPower(float power) {
+        this.power = power;
+    }
+
+    public String getUsageTime() {
+        return usageTime;
+    }
+
+    public void setUsageTime(String usageTime) {
+        this.usageTime = usageTime;
+    }
 }

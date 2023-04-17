@@ -8,23 +8,42 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/user/devices")
+@RequestMapping("api/user/address/devices")
 public class DeviceController {
 
-    private DeviceService deviceService;
+    private DeviceService service;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<String> teste() {
-        return new ResponseEntity<String>
-        ("Deu certo! \nAqui é a tela de dispositivos",
-        HttpStatus.CREATED);
+    @GetMapping
+    public ResponseEntity<List<Device>> findAll() {
+        List<Device> list = service.findAll();
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Device> findById(@PathVariable Long id){
+        Device obj = service.findById(id);
+        return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping("/")
     public ResponseEntity<Long> createDevice(@RequestBody Device device){
-        Long id = deviceService.create(device);
+        Long id = service.create(device);
         return new ResponseEntity<Long>(id, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Device> update(@PathVariable Long id, @RequestBody Device obj){
+        obj = service.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id)  {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

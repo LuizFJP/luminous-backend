@@ -1,5 +1,6 @@
 package com.br.luminous.exceptions;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -45,8 +46,9 @@ public class Handler extends ResponseEntityExceptionHandler {
                 "Unauthorized data",
                 ex,
                 HttpStatus.UNAUTHORIZED);
-
     }
+
+
 
     private ResponseEntity<Object> getObjectResponseEntity(String message, Object cause, RuntimeException ex, HttpStatus httpStatus) {
         Map<String, Object> body = new HashMap<>();
