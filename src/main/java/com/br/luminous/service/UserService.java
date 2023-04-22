@@ -3,7 +3,9 @@ package com.br.luminous.service;
 import com.br.luminous.DTO.UserRequest;
 import com.br.luminous.DTO.UserResponse;
 import com.br.luminous.entity.User;
+import com.br.luminous.entity.Address;
 import com.br.luminous.exceptions.UserNotFoundException;
+import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.repository.TokenRepository;
 import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -60,4 +62,5 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
         return user.orElseThrow(UserNotFoundException::new);
     }
+
 }

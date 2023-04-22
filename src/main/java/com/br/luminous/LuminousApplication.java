@@ -15,18 +15,3 @@ public class LuminousApplication {
 	}
 
 	}
-
-	//	@Bean
-//	public WebMvcConfigurer configure() {
-//		return new WebMvcConfigurer() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry reg) {
-//				reg.addMapping("/**")
-//						.allowedMethods("GET", "POST", "DELETE", "PUT")
-//						.allowedOriginPatterns("*")
-//						.allowedOrigins("*");
-//			}
-//		};
-//	}
-//
-//}
