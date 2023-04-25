@@ -54,7 +54,6 @@ public class UserService {
         } catch (RuntimeException notFoundException) {
             throw new UserNotFoundException();
         }
-
     }
 
     public User getUserById(Long id) {
