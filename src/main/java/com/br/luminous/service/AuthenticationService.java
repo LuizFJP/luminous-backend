@@ -6,6 +6,7 @@ import com.br.luminous.DTO.UserRequest;
 import com.br.luminous.entity.Token;
 import com.br.luminous.entity.User;
 import com.br.luminous.enums.TokenType;
+import com.br.luminous.exceptions.EmailAlreadyExistsException;
 import com.br.luminous.repository.TokenRepository;
 import com.br.luminous.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +25,24 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final UserService userService;
 
 
     public AuthenticationResponse register(UserRequest userRequest) {
-        var user = new User();
-        BeanUtils.copyProperties(userRequest, user);
-        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        User savedUser = userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user, user.getId());
-        saveUserToken(savedUser, jwtToken);
-        return new AuthenticationResponse(jwtToken);
+        try {
+            userService.checkEmailAlreadyExists(userRequest.getEmail());
+            var user = new User();
+            BeanUtils.copyProperties(userRequest, user);
+            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+            User savedUser = userRepository.save(user);
+            var jwtToken = jwtService.generateToken(user, user.getId());
+            saveUserToken(savedUser, jwtToken);
+            return new AuthenticationResponse(jwtToken);
+        } catch(EmailAlreadyExistsException e) {
+            throw e;
+        }
+
+
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {

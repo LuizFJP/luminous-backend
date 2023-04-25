@@ -3,6 +3,7 @@ package com.br.luminous.service;
 import com.br.luminous.DTO.UserRequest;
 import com.br.luminous.DTO.UserResponse;
 import com.br.luminous.entity.User;
+import com.br.luminous.exceptions.EmailAlreadyExistsException;
 import com.br.luminous.exceptions.UserNotFoundException;
 import com.br.luminous.repository.TokenRepository;
 import com.br.luminous.repository.UserRepository;
@@ -53,11 +54,16 @@ public class UserService {
         } catch (RuntimeException notFoundException) {
             throw new UserNotFoundException();
         }
-
     }
 
     public User getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElseThrow(UserNotFoundException::new);
+    }
+
+    public void checkEmailAlreadyExists(String email) throws EmailAlreadyExistsException {
+        userRepository.findByEmail(email).ifPresent(a -> {
+                throw new EmailAlreadyExistsException();
+        });
     }
 }

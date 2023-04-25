@@ -17,10 +17,10 @@ import java.util.List;
 @RequestMapping("api/weather-tip")
 public class WeatherTipController {
     private final WeatherTipService weatherTipService;
-    @GetMapping("/")
-    public ResponseEntity<WeatherTipResponse> getWeatherTip() {
+    @GetMapping("/{id}")
+    public ResponseEntity<WeatherTipResponse> getWeatherTip(Long id) {
 
-        var response = weatherTipService.getTip("");
+        var response = weatherTipService.getTip(id);
         return new ResponseEntity<WeatherTipResponse>(response, HttpStatus.OK);
     }
 }
