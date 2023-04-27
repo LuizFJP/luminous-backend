@@ -1,6 +1,7 @@
 package com.br.luminous.entity;
 import lombok.Data;
 import jakarta.persistence.*;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -11,7 +12,7 @@ public class Device {
     private Long Id;
     private String name;
     private float power;
-    private String usageTime;
+    private LocalTime usageTime;
     public Long getId() {
         return Id;
     }
@@ -30,11 +31,9 @@ public class Device {
         this.power = power;
     }
 
-    public String getUsageTime() {
-        return usageTime;
-    }
+    public LocalTime getUsageTime() {return usageTime;}
 
-    public void setUsageTime(String usageTime) {
+    public void setUsageTime(LocalTime usageTime) {
         this.usageTime = usageTime;
     }
 }
