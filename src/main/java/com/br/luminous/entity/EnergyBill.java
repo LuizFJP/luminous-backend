@@ -18,6 +18,6 @@ public class EnergyBill {
     private LocalDate dueDate;
     private Double energyConsumptionReais;
     private Double energyConsumption_kWh;
-    private String documentBill;
+    private String documentBillPath;
 
 }
