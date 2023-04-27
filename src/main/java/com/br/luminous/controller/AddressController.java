@@ -1,5 +1,6 @@
 package com.br.luminous.controller;
-
+import com.br.luminous.DTO.AddressRequest;
+import com.br.luminous.DTO.AddressResponse;
 import com.br.luminous.entity.Address;
 import com.br.luminous.service.AddressService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,18 @@ public class AddressController {
     public ResponseEntity<Long> createAddress(@RequestBody Address address){
         Long id = addressService.create(address);
         return new ResponseEntity<Long>(id, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AddressResponse> updateAddress(@PathVariable Long id, @RequestBody AddressRequest address) {
+        addressService.update(id, address);
+        return new ResponseEntity(address, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteAddress(@PathVariable Long id) {
+        addressService.delete(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
