@@ -12,11 +12,10 @@ public class Device {
     private String name;
     private float power;
     private String usageTime;
-
+    //private Address address;
     public Long getId() {
         return Id;
     }
-
     public String getName() {
         return name;
     }

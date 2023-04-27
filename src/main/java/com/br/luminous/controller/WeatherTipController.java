@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("api/weather-tip")
 public class WeatherTipController {
     private final WeatherTipService weatherTipService;
-    @GetMapping("/")
+    @GetMapping("/{id}")
     public ResponseEntity<WeatherTipResponse> getWeatherTip(Long id) {
 
         var response = weatherTipService.getTip(id);
