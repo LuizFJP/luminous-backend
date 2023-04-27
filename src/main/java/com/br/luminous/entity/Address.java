@@ -12,9 +12,10 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String city;
-    private int cep;
+    private String cep;
     private int houseNumber;
     private int inputVoltage;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
