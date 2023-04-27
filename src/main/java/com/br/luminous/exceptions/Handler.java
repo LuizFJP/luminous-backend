@@ -58,9 +58,7 @@ public class Handler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(body, httpStatus);
     }
-<<<<<<< HEAD
 
-=======
     @ExceptionHandler(TipNotFoundException.class)
     public ResponseEntity<Object> handleTipNotFoundException(TipNotFoundException exception, WebRequest request){
         Map<String, Object> body = new HashMap<>();
@@ -79,5 +77,4 @@ public class Handler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
->>>>>>> 501f1cedab2577eb350d9a4fd7049b9bce3bab5e
 }
