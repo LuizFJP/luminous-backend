@@ -20,4 +20,8 @@ public class EnergyBill {
     private Double energyConsumption_kWh;
     private String documentBillPath;
 
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address adress;
+
 }

@@ -4,6 +4,8 @@ import lombok.Data;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "addresses")
@@ -15,6 +17,12 @@ public class Address {
     private String cep;
     private int houseNumber;
     private int inputVoltage;
+
+    @OneToMany
+    private List<Device> devices;
+
+    @OneToMany()
+    private List<EnergyBill> energyBills;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
