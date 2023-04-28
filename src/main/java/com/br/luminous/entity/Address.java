@@ -21,7 +21,7 @@ public class Address {
     @OneToMany
     private List<Device> devices;
 
-    @OneToMany()
+    @OneToMany
     private List<EnergyBill> energyBills;
 
     @ManyToOne

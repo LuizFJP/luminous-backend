@@ -42,5 +42,4 @@ public class Device {
         this.usageTime = usageTime;
     }
 
-    public Address getAdress(){return adress;}
 }
