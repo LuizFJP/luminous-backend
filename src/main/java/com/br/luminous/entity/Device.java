@@ -13,6 +13,11 @@ public class Device {
     private String name;
     private float power;
     private LocalTime usageTime;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address adress;
+
     public Long getId() {
         return Id;
     }
@@ -36,4 +41,5 @@ public class Device {
     public void setUsageTime(LocalTime usageTime) {
         this.usageTime = usageTime;
     }
+
 }
