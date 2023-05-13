@@ -1,7 +1,7 @@
 package com.br.luminous.service;
 
-import com.br.luminous.DTO.AddressRequest;
-import com.br.luminous.DTO.AddressResponse;
+import com.br.luminous.models.AddressRequest;
+import com.br.luminous.models.AddressResponse;
 import com.br.luminous.entity.Address;
 import com.br.luminous.entity.User;
 import com.br.luminous.exceptions.AddressNotFoundException;

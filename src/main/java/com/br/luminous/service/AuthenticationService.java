@@ -1,8 +1,8 @@
 package com.br.luminous.service;
 
-import com.br.luminous.DTO.AuthenticationRequest;
-import com.br.luminous.DTO.AuthenticationResponse;
-import com.br.luminous.DTO.UserRequest;
+import com.br.luminous.models.AuthenticationRequest;
+import com.br.luminous.models.AuthenticationResponse;
+import com.br.luminous.models.UserRequest;
 import com.br.luminous.entity.Token;
 import com.br.luminous.entity.User;
 import com.br.luminous.enums.TokenType;

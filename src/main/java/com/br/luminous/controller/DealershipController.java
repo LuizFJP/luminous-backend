@@ -1,6 +1,6 @@
 package com.br.luminous.controller;
-import com.br.luminous.DTO.DealershipRequest;
-import com.br.luminous.DTO.DealershipResponse;
+import com.br.luminous.models.DealershipRequest;
+import com.br.luminous.models.DealershipResponse;
 import com.br.luminous.entity.Dealership;
 import com.br.luminous.service.DealershipService;
 import lombok.AllArgsConstructor;
