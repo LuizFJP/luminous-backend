@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "weather_tips")
-public class WeatherTips {
+@Table(name = "weather_tip")
+public class WeatherTip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;

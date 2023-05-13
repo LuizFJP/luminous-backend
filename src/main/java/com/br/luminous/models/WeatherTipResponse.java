@@ -1,6 +1,6 @@
 package com.br.luminous.models;
 
-import com.br.luminous.entity.WeatherTips;
+import com.br.luminous.entity.WeatherTip;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +16,5 @@ public class WeatherTipResponse {
     private String city;
     private BigDecimal temperature;
     private BigDecimal feelsLike;
-    private List<WeatherTips> tips;
+    private List<WeatherTip> tips;
 }

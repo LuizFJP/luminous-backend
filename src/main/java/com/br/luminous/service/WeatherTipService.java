@@ -1,14 +1,12 @@
 package com.br.luminous.service;
 
-import com.br.luminous.entity.WeatherTips;
+import com.br.luminous.entity.WeatherTip;
 import com.br.luminous.enums.ClimateType;
 import com.br.luminous.models.WeatherTipResponse;
-import com.br.luminous.repository.UserRepository;
 import com.br.luminous.repository.WeatherTipRepository;
 import com.br.luminous.rest.weatherNotification.WeatherNotificationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -44,7 +42,7 @@ public class WeatherTipService {
         BigDecimal temperature = response.getBody().getMain().getTemp();
         BigDecimal feelsLike = response.getBody().getMain().getFeelsLike();
 
-        List<WeatherTips> weatherTips;
+        List<WeatherTip> weatherTips;
         if (temperature.compareTo(new BigDecimal(SIXTEEN_DEGREES)) >= 0) {
             weatherTips = weatherTipRepository.findAllWeatherTipsByClimate(ClimateType.HOT);
         } else {

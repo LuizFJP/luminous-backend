@@ -1,11 +1,10 @@
 package com.br.luminous.service;
 
-import com.br.luminous.DTO.DealershipRequest;
-import com.br.luminous.DTO.DealershipResponse;
+import com.br.luminous.models.DealershipRequest;
+import com.br.luminous.models.DealershipResponse;
 import com.br.luminous.entity.Dealership;
 import com.br.luminous.exceptions.DealershipNotFoundException;
 import com.br.luminous.repository.DealershipRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -47,7 +46,7 @@ public class DealershipService {
             Dealership dealership = getDealershipById(id);
             BeanUtils.copyProperties(dealershipRequest, dealership);
             dealership.setName(dealershipRequest.getName());
-            dealership.setUrlMantain(dealershipRequest.getUrlMantain());
+            dealership.setUrlMaintain(dealershipRequest.getUrlMantain());
             dealership.setUrlEnergyFall(dealershipRequest.getUrlEnergyFall());
             dealershipRepository.save(dealership);
             var dealershipResponse = new DealershipResponse();
