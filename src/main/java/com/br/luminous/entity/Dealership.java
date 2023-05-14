@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Data
 @Entity
-@Table(name = "dealerships")
+@Table(name = "dealership")
 public class Dealership {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,7 +14,7 @@ public class Dealership {
 
     private String name;
 
-    private String urlMantain;
+    private String urlMaintain;
 
     private String urlEnergyFall;
 

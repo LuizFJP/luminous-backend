@@ -1,6 +1,4 @@
 package com.br.luminous.controller;
-import com.br.luminous.DTO.UserRequest;
-import com.br.luminous.DTO.UserResponse;
 import com.br.luminous.entity.Device;
 import com.br.luminous.service.DeviceService;
 import lombok.AllArgsConstructor;
