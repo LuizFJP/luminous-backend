@@ -77,4 +77,14 @@ public class Handler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(DeviceNotFoundException.class)
+    public ResponseEntity<Object> handleDeviceNotFoundException(DeviceNotFoundException exception, WebRequest request){
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", exception.getMessage());
+        body.put("returned", exception.getCause());
+        body.put("time", new Date().toString());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
 }

@@ -25,13 +25,13 @@ public class DeviceController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Device> findById(@PathVariable Long id){
-        Device obj = service.findById(id);
-        return ResponseEntity.ok().body(obj);
+        Device device = service.findById(id);
+        return new ResponseEntity<Device> (device, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Long> createDevice(@RequestBody Device device){
-        Long id = service.create(device);
+    public ResponseEntity<Long> createDevice(@RequestBody Device device, @PathVariable Long addressId){
+        Long id = service.create(device, addressId);
         return new ResponseEntity<Long>(id, HttpStatus.CREATED);
     }
 

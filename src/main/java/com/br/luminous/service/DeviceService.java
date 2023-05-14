@@ -51,7 +51,7 @@ public class DeviceService {
             throw new DeviceNotFoundException();
         }
     }
-    public Long create(Device device){
+    public Long create(Device device, Long addressId){
         Device response = deviceRepository.save(device);
         return response.getId();
     }
