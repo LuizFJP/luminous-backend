@@ -20,7 +20,4 @@ public class AddressRequest {
     private String street;
     private String state;
     private String neighborhood;
-    private List<Device> devices;
-    private List<EnergyBill> energyBills;
-    private List<User> user;
 }

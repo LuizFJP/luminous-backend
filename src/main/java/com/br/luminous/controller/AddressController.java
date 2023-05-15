@@ -1,5 +1,6 @@
 package com.br.luminous.controller;
 
+import com.br.luminous.mapper.AddressRequestToEntity;
 import com.br.luminous.models.AddressRequest;
 import com.br.luminous.models.AddressResponse;
 import com.br.luminous.service.AddressService;
@@ -21,10 +22,10 @@ public class AddressController {
         return new ResponseEntity<AddressResponse>(address, HttpStatus.OK);
     }
 
-   @PostMapping
-    public ResponseEntity<Long> createAddress(@RequestBody AddressRequest address){
-        Long id = addressService.create(address);
-        return new ResponseEntity<Long>(id, HttpStatus.CREATED);
+   @PostMapping("/{id}")
+    public ResponseEntity<Long> createAddress(@PathVariable Long id, @RequestBody AddressRequest address){
+        Long response = addressService.create(id, address);
+        return new ResponseEntity<Long>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

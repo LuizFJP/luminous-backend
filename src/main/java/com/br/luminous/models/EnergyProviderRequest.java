@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EnergyProviderRequest {
     private String name;
-    private String urlMantaintenance;
+    private String urlMaintenance;
     private String urlEnergyFall;
 }

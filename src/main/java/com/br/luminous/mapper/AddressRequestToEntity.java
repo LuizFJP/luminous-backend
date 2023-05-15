@@ -11,7 +11,7 @@ public class AddressRequestToEntity {
     public Address mapper (AddressRequest addressRequest){
         var address = new Address();
 
-        BeanUtils.copyProperties(address, addressRequest);
+        BeanUtils.copyProperties(addressRequest, address);
         return address;
     }
 }

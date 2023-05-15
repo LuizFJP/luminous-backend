@@ -1,10 +1,11 @@
 package com.br.luminous.controller;
-import com.br.luminous.DTO.EnergyProviderRequest;
-import com.br.luminous.DTO.EnergyProviderResponse;
+
 import com.br.luminous.entity.EnergyProvider;
+import com.br.luminous.mapper.EnergyProvReqToEnergyProvEnt;
+import com.br.luminous.models.EnergyProviderRequest;
+import com.br.luminous.models.EnergyProviderResponse;
 import com.br.luminous.service.EnergyProviderService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +18,14 @@ public class EnergyProviderController {
     private EnergyProviderService energyProviderService;
 
     @RequestMapping("/{name}")
-    public ResponseEntity<EnergyProviderResponse> getEnergyProviderByName(@PathVariable String name){
-        EnergyProviderResponse energyProvider = energyProviderService.getEnergyProviderByName(name);
-        return new ResponseEntity<EnergyProviderResponse>(energyProvider, HttpStatus.OK);
+    public ResponseEntity<EnergyProvider> getEnergyProviderByName(@PathVariable String name) {
+        EnergyProvider energyProvider = energyProviderService.getEnergyProviderByName(name);
+        return new ResponseEntity<EnergyProvider>(energyProvider, HttpStatus.OK);
     }
 
 
     @PostMapping
-    public ResponseEntity<Long> createealEnergyProvider(@RequestBody EnergyProviderRequest energyProvider){
+    public ResponseEntity<Long> createEnergyProvider(@RequestBody EnergyProviderRequest energyProvider) {
         Long id = energyProviderService.create(energyProvider);
         return new ResponseEntity<Long>(id, HttpStatus.CREATED);
     }

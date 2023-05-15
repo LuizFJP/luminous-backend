@@ -25,7 +25,8 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private LocalDate birthdate;
-    @OneToMany
+    @OneToMany()
+    @Column(name = "addresses")
     private List<Address> addresses;
 
     @Override

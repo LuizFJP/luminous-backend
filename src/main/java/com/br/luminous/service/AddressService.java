@@ -21,23 +21,17 @@ public class AddressService {
     private AddressRequestToEntity addressRequestToEntity;
     private UserService userService;
 
-    public Long create(AddressRequest address){
-       var addressEntity = addressRequestToEntity.mapper(address);
-       Address response = addressRepository.save(addressEntity);
-        return response.getId();
-    }
-
-    public Address addAdress(Long id, Address address) {
-        User user = userService.getUserById(id);
+    public Long create(Long userId, AddressRequest addressRequest){
+        var address = addressRequestToEntity.mapper(addressRequest);
+        User user = userService.getUserById(userId);
         address.setUser(user);
-        return addressRepository.save(address);
+        return addressRepository.save(address).getId();
     }
 
     public Address getAddressById(Long id){
         Optional<Address> address = addressRepository.findById(id);
         return address.orElseThrow(AddressNotFoundException::new);
     }
-
 
     public AddressResponse get(Long id) {
         try {

@@ -3,21 +3,20 @@ package com.br.luminous.entity;
 import lombok.Data;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="address_id")
     private Long id;
     private String city;
     private String cep;
-    private String road;
-    private String neighborhood;
     private int houseNumber;
     private int inputVoltage;
     private String street;

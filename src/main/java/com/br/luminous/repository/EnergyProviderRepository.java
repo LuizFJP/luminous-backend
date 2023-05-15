@@ -7,6 +7,6 @@ import java.util.Optional;
 @Repository
 public interface EnergyProviderRepository extends CrudRepository<EnergyProvider, Long> {
 
-    public Optional<EnergyProvider> findByName(String name);
+    public Optional<EnergyProvider> findByCompanyName(String name);
 
 }
