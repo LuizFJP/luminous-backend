@@ -486,14 +486,17 @@ INSERT INTO weather_tip (tip, climate) VALUES
                                             ('Abra as janelas para a entrada de ar fresco!', 'HOT');
 
 INSERT INTO users (user_id, name, phone, user_name, email, password, birthdate)
-    VALUES (1, 'Testador', '123456789', 'tester', 'email@email', '12345678', '1950-12-12');
+    VALUES (10, 'Testador', '123456789', 'tester', 'email@email', '$2a$10$xEnEKVKE2nkt.BRidai5ZOT.Qk4f93TQLAYui1gL7/2S4wJ/QddJO', '1950-12-12');
+
 
 INSERT INTO address (id, city, cep, road, neighborhood, house_number, input_voltage, user_id)
-    VALUES (1, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 123, 110, 1),
-           (2, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 234, 110, 1),
-           (3, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 345, 220, 1);
+    VALUES (10, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 123, 110, 10);
+--            (20, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 234, 110, 10),
+--            (30, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 345, 220, 10);
+
+insert INTO users_addresses (user_user_id, addresses_id) VALUES(10,10);
 
 INSERT INTO device (id, name, power, usage_time, address_id)
-    VALUES (1, 'Geladeira', 220, '23:59', 1),
-           (2, 'Computador', 1200, '06:00', 1),
-           (3, 'Microondas', 900, '10:00', 1);
+    VALUES (1, 'Geladeira', 220, '23:59', 10),
+           (2, 'Computador', 1200, '06:00', 10),
+           (3, 'Microondas', 900, '10:00', 10);

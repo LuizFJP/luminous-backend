@@ -27,7 +27,7 @@ public class Address {
     private List<EnergyBill> energyBills;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
 }
