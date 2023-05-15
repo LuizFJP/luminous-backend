@@ -1,15 +1,16 @@
 package com.br.luminous.service;
 
+
 import com.br.luminous.models.AddressRequest;
 import com.br.luminous.models.AddressResponse;
 import com.br.luminous.entity.Address;
 import com.br.luminous.entity.User;
 import com.br.luminous.exceptions.AddressNotFoundException;
+import com.br.luminous.mapper.AddressRequestToEntity;
 import com.br.luminous.repository.AddressRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,23 +18,19 @@ import java.util.Optional;
 public class AddressService {
 
     private AddressRepository addressRepository;
-
+    private AddressRequestToEntity addressRequestToEntity;
     private UserService userService;
 
-    public Long create(Address address){
-        Address response = addressRepository.save(address);
+    public Long create(AddressRequest address){
+       var addressEntity = addressRequestToEntity.mapper(address);
+       Address response = addressRepository.save(addressEntity);
         return response.getId();
     }
 
-    public Address save(Long id, Address address) throws Exception {
+    public Address addAdress(Long id, Address address) {
         User user = userService.getUserById(id);
         address.setUser(user);
         return addressRepository.save(address);
-    }
-
-    public List<Address> getAddresses(Long id) throws Exception {
-        User user = userService.getUserById(id);
-        return user.getAddresses();
     }
 
     public Address getAddressById(Long id){
@@ -80,6 +77,7 @@ public class AddressService {
         }
 
     }
+
 
 }
 

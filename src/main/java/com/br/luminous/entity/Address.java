@@ -12,6 +12,7 @@ import java.util.List;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="address_id")
     private Long id;
     private String city;
     private String cep;
@@ -19,6 +20,9 @@ public class Address {
     private String neighborhood;
     private int houseNumber;
     private int inputVoltage;
+    private String street;
+    private String state;
+    private String neighborhood;
 
     @OneToMany
     private List<Device> devices;

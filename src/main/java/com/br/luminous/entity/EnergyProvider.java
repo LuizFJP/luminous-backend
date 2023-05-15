@@ -1,7 +1,9 @@
 package com.br.luminous.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
+
+import jakarta.persistence.*;
+
 
 @Data
 @Entity
