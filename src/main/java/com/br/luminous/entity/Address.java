@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "addresses")
+@Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,6 +16,8 @@ public class Address {
     private Long id;
     private String city;
     private String cep;
+    private String road;
+    private String neighborhood;
     private int houseNumber;
     private int inputVoltage;
     private String street;

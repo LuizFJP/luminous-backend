@@ -1,17 +1,16 @@
 package com.br.luminous.service;
 
-import com.br.luminous.DTO.AddressResponse;
+
+import com.br.luminous.models.AddressRequest;
+import com.br.luminous.models.AddressResponse;
 import com.br.luminous.entity.Address;
 import com.br.luminous.entity.User;
 import com.br.luminous.exceptions.AddressNotFoundException;
 import com.br.luminous.mapper.AddressRequestToEntity;
-import com.br.luminous.models.AddressRequest;
 import com.br.luminous.repository.AddressRepository;
-import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
 
 @Service

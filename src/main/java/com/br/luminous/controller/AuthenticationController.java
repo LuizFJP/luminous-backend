@@ -1,9 +1,8 @@
 package com.br.luminous.controller;
 
-import com.br.luminous.DTO.AuthenticationRequest;
-import com.br.luminous.DTO.AuthenticationResponse;
-import com.br.luminous.DTO.UserRequest;
-import com.br.luminous.DTO.UserResponse;
+import com.br.luminous.models.AuthenticationRequest;
+import com.br.luminous.models.AuthenticationResponse;
+import com.br.luminous.models.UserRequest;
 import com.br.luminous.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

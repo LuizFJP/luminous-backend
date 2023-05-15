@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 @Entity
 @Data
-@Table(name ="devices")
+@Table(name ="device")
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,30 +16,5 @@ public class Device {
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)
-    private Address adress;
-
-    public Long getId() {
-        return Id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public float getPower() {
-        return power;
-    }
-
-    public void setPower(float power) {
-        this.power = power;
-    }
-
-    public LocalTime getUsageTime() {return usageTime;}
-
-    public void setUsageTime(LocalTime usageTime) {
-        this.usageTime = usageTime;
-    }
-
+    private Address address;
 }

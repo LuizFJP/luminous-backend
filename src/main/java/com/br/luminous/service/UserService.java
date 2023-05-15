@@ -1,12 +1,10 @@
 package com.br.luminous.service;
 
-import com.br.luminous.DTO.UserRequest;
-import com.br.luminous.DTO.UserResponse;
+import com.br.luminous.models.UserRequest;
+import com.br.luminous.models.UserResponse;
 import com.br.luminous.entity.User;
 import com.br.luminous.exceptions.EmailAlreadyExistsException;
-import com.br.luminous.entity.Address;
 import com.br.luminous.exceptions.UserNotFoundException;
-import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.repository.TokenRepository;
 import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;

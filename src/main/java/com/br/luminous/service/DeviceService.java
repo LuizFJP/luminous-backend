@@ -8,7 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,7 +51,7 @@ public class DeviceService {
             throw new DeviceNotFoundException();
         }
     }
-    public Long create(Device device){
+    public Long create(Device device, Long addressId){
         Device response = deviceRepository.save(device);
         return response.getId();
     }

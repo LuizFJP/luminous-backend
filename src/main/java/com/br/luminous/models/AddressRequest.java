@@ -3,14 +3,12 @@ package com.br.luminous.models;
 import com.br.luminous.entity.Device;
 import com.br.luminous.entity.EnergyBill;
 import com.br.luminous.entity.User;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
