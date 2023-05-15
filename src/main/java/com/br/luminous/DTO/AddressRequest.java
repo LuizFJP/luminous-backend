@@ -10,4 +10,7 @@ public class AddressRequest {
     private String cep;
     private int houseNumber;
     private int inputVoltage;
+    private String street;
+    private String state;
+    private String neighborhood;
 }

@@ -1,26 +1,24 @@
 package com.br.luminous.entity;
 
+import com.br.luminous.DTO.EnergyProviderResponse;
 import lombok.Data;
 
 import jakarta.persistence.*;
 
 @Data
 @Entity
-@Table(name = "dealerships")
-public class Dealership {
+@Table(name = "energyProvider")
+public class EnergyProvider extends EnergyProviderResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="energyProvider_id")
     private Long id;
 
     private String name;
 
-    private String urlMantain;
+    private String urlMantaintenance;
 
     private String urlEnergyFall;
-
-  // NÃO PRECISA  private String cnpj;
 }
 
-/* Concessionária (Dealership)
-*
-* */
+
