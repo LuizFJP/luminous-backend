@@ -1,8 +1,7 @@
 package com.br.luminous.controller;
 
-import com.br.luminous.DTO.UserRequest;
-import com.br.luminous.DTO.UserResponse;
-import com.br.luminous.entity.User;
+import com.br.luminous.models.UserRequest;
+import com.br.luminous.models.UserResponse;
 import com.br.luminous.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/api/user")
 public class UserController {
+
     private UserService userService;
+
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {

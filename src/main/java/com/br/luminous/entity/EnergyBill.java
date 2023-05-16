@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "bills")
+@Table(name = "energy_bill")
 public class EnergyBill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +18,10 @@ public class EnergyBill {
     private LocalDate dueDate;
     private Double energyConsumptionReais;
     private Double energyConsumption_kWh;
-    private String documentBill;
+    private String documentBillPath;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = true)
+    private Address address;
 
 }

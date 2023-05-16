@@ -1,6 +1,4 @@
 package com.br.luminous.controller;
-import com.br.luminous.DTO.UserRequest;
-import com.br.luminous.DTO.UserResponse;
 import com.br.luminous.entity.Device;
 import com.br.luminous.service.DeviceService;
 import lombok.AllArgsConstructor;
@@ -8,23 +6,42 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/user/devices")
+@RequestMapping("api/user/address/devices")
 public class DeviceController {
 
     private DeviceService deviceService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<String> teste() {
-        return new ResponseEntity<String>
-        ("Deu certo! \nAqui é a tela de dispositivos",
-        HttpStatus.CREATED);
+    @GetMapping
+    public ResponseEntity<List<Device>> findAll() {
+        List<Device> list = deviceService.findAll();
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Device> findById(@PathVariable Long id){
+        Device device = deviceService.findById(id);
+        return new ResponseEntity<Device> (device, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Long> createDevice(@RequestBody Device device){
-        Long id = deviceService.create(device);
+    public ResponseEntity<Long> createDevice(@RequestBody Device device, @PathVariable Long addressId){
+        Long id = deviceService.create(device, addressId);
         return new ResponseEntity<Long>(id, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Device> update(@PathVariable Long id, @RequestBody Device device){
+        device = deviceService.update(id, device);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id)  {
+        deviceService.delete(id);
+        return new ResponseEntity (HttpStatus.OK);
     }
 }
