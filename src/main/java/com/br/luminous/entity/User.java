@@ -1,5 +1,6 @@
 package com.br.luminous.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 
@@ -27,6 +28,7 @@ public class User implements UserDetails {
     private LocalDate birthdate;
     @OneToMany()
     @Column(name = "addresses")
+    @JsonManagedReference
     private List<Address> addresses;
 
     @Override

@@ -8,6 +8,7 @@ import com.br.luminous.entity.User;
 import com.br.luminous.exceptions.AddressNotFoundException;
 import com.br.luminous.mapper.AddressRequestToEntity;
 import com.br.luminous.repository.AddressRepository;
+import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,16 @@ public class AddressService {
 
     private AddressRepository addressRepository;
     private AddressRequestToEntity addressRequestToEntity;
+    private UserRepository userRepository;
     private UserService userService;
 
     public Long create(Long userId, AddressRequest addressRequest){
         var address = addressRequestToEntity.mapper(addressRequest);
-        User user = userService.getUserById(userId);
+        var user = updateUserAddresses(userId, address);
         address.setUser(user);
-        return addressRepository.save(address).getId();
+        var savedAddress = addressRepository.save(address);
+        userRepository.save(user);
+        return savedAddress.getId();
     }
 
     public Address getAddressById(Long id){
@@ -72,7 +76,13 @@ public class AddressService {
 
     }
 
-
+private User updateUserAddresses(Long userId, Address address) {
+    User user = userService.getUserById(userId);
+    var addresses = user.getAddresses();
+    addresses.add(address);
+    user.setAddresses(addresses);
+    return user;
+}
 }
 
 
