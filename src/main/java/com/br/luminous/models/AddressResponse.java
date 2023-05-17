@@ -15,4 +15,5 @@ public class AddressResponse {
     private String street;
     private String state;
     private String neighborhood;
+    private UserResponse userResponse;
 }

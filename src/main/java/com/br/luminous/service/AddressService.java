@@ -1,6 +1,6 @@
 package com.br.luminous.service;
 
-
+import com.br.luminous.exceptions.UserNotFoundException;
 import com.br.luminous.models.AddressRequest;
 import com.br.luminous.models.AddressResponse;
 import com.br.luminous.entity.Address;
@@ -12,6 +12,8 @@ import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,24 +34,19 @@ public class AddressService {
         return savedAddress.getId();
     }
 
+    public List<Address> getAddressByUserId(Long userId){
+        Optional<List<Address>>
+         addresses = addressRepository.findByUserId(userId);
+        return addresses.orElseThrow(UserNotFoundException::new);
+    }
+
     public Address getAddressById(Long id){
         Optional<Address> address = addressRepository.findById(id);
         return address.orElseThrow(AddressNotFoundException::new);
     }
 
-    public AddressResponse get(Long id) {
-        try {
-            var address = getAddressById(id);
-            var addressResponse = new AddressResponse();
-            BeanUtils.copyProperties(address, addressResponse);
-            return addressResponse;
-        } catch (RuntimeException notFoundException) {
-            throw new AddressNotFoundException();
-        }
-    }
 
-
-    public AddressResponse update(Long id, AddressRequest addressRequest) {
+    public AddressResponse update(Long userId, Long id, AddressRequest addressRequest) {
         try {
             Address address = getAddressById(id);
             BeanUtils.copyProperties(addressRequest, address);
@@ -66,7 +63,7 @@ public class AddressService {
         }
     }
 
-    public void delete(Long id) {
+    public void delete(Long userId, Long id) {
         try {
             getAddressById(id);
             addressRepository.deleteById(id);
@@ -76,13 +73,15 @@ public class AddressService {
 
     }
 
-private User updateUserAddresses(Long userId, Address address) {
-    User user = userService.getUserById(userId);
-    var addresses = user.getAddresses();
-    addresses.add(address);
-    user.setAddresses(addresses);
-    return user;
-}
+    private User updateUserAddresses(Long userId, Address address) {
+        User user = userService.getUserById(userId);
+        var addresses = user.getAddresses();
+        addresses.add(address);
+        user.setAddresses(addresses);
+        return user;
+    }
+
+
 }
 
 

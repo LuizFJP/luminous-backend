@@ -1,4 +1,6 @@
 package com.br.luminous.entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import jakarta.persistence.*;
 import java.time.LocalTime;
@@ -16,5 +18,7 @@ public class Device {
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)
+    @JsonManagedReference
+    @JsonIgnoreProperties("address")
     private Address address;
 }
