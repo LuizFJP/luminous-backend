@@ -1,5 +1,6 @@
 package com.br.luminous.controller;
 
+import com.br.luminous.models.WhiteTaxResponse;
 import com.br.luminous.service.EnergyBillService;
 import com.br.luminous.entity.EnergyBill;
 import lombok.AllArgsConstructor;
@@ -26,9 +27,10 @@ public class EnergyBillController {
             return new ResponseEntity<Long>(id, HttpStatus.CREATED);
         }
         @GetMapping("/getAllEnergyBills")
-    public List<EnergyBill> getAllEnergyBills(){
-        List<EnergyBill> energyBills = energyBillService.getAllEnergyBills();
-        return energyBills;
+    public ResponseEntity<List<EnergyBill>> getAllEnergyBills(){
+        var response = energyBillService.getAllEnergyBills();
+        return new ResponseEntity<List<EnergyBill>>(
+                response, HttpStatus.OK);
         }
 
 }

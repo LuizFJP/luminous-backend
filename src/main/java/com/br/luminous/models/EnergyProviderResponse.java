@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class EnergyProviderResponse {
     private String name;
 
-    private String urlMantaintenance;
+    private String urlMaintenance;
 
     private String urlEnergyFall;
 }

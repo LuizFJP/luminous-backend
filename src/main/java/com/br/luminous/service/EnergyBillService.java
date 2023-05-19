@@ -26,7 +26,6 @@ public class EnergyBillService {
         return response.orElseThrow(EnergyBillNotFoundException::new);
     }
     public List<EnergyBill> getAllEnergyBills(){
-        return StreamSupport.stream(energyBillRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+        return energyBillRepository.findAll();
     }
 }
