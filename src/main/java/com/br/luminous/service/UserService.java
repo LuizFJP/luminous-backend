@@ -19,7 +19,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private UserRepository userRepository;
-    private AddressRepository addressRepository;
     private TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
 
