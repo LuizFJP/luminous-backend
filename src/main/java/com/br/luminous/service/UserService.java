@@ -5,6 +5,7 @@ import com.br.luminous.models.UserResponse;
 import com.br.luminous.entity.User;
 import com.br.luminous.exceptions.EmailAlreadyExistsException;
 import com.br.luminous.exceptions.UserNotFoundException;
+import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.repository.TokenRepository;
 import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private UserRepository userRepository;
+    private AddressRepository addressRepository;
     private TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
 
