@@ -1,6 +1,7 @@
 package com.br.luminous.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 
@@ -26,9 +27,10 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private LocalDate birthdate;
-    @OneToMany()
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Column(name = "addresses")
     @JsonManagedReference
+    @JsonIgnoreProperties("addresses")
     private List<Address> addresses;
 
     @Override
