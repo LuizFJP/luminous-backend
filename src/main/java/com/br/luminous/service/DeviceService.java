@@ -4,6 +4,7 @@ import com.br.luminous.entity.Device;
 import com.br.luminous.exceptions.DatabaseException;
 import com.br.luminous.exceptions.DeviceNotFoundException;
 import com.br.luminous.exceptions.AddressNotFoundException;
+import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.repository.DeviceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,9 +21,12 @@ import java.util.Optional;
 public class DeviceService {
 
     private DeviceRepository deviceRepository;
+    private AddressService addressService;
+    private AddressRepository addressRepository;
 
     public List<Device> findDevicesByAddressId(Long addressId){
-        Optional<List<Device>> devices = deviceRepository.findByAddressId(addressId);
+        Optional<List<Device>>
+                devices = deviceRepository.findByAddressId(addressId);
         return devices.orElseThrow(AddressNotFoundException::new);
     }
 
@@ -45,7 +49,7 @@ public class DeviceService {
         }
     }
 
-    public Device update (Long id, Device obj){
+    public Device update (Long addressId, Long id, Device obj){
         try{
             Device entity = findDeviceById(id);
             updateData(entity, obj);
@@ -55,7 +59,10 @@ public class DeviceService {
         }
     }
     public Long create(Device device, Long addressId){
+        Address address = updateAddressDevices(addressId, device);
+        device.setAddress(address);
         Device response = deviceRepository.save(device);
+        addressRepository.save(address);
         return response.getId();
     }
 
@@ -63,5 +70,13 @@ public class DeviceService {
         device.setName(obj.getName());
         device.setPower(obj.getPower());
         device.setUsageTime(obj.getUsageTime());
+    }
+
+    private Address updateAddressDevices(Long addressId, Device device){
+        Address address =  addressService.getAddressById(addressId);
+        List<Device> devices = address.getDevices();
+        devices.add(device);
+        address.setDevices(devices);
+        return address;
     }
 }
