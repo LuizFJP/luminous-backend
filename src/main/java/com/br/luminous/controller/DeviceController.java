@@ -16,14 +16,14 @@ public class DeviceController {
     private DeviceService deviceService;
 
     @GetMapping
-    public ResponseEntity<List<Device>> findAll() {
-        List<Device> list = deviceService.findAll();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<List<Device>> getDevicesOfAddress(Long addressId) {
+        List<Device> list = deviceService.findDevicesByAddressId(addressId);
+        return new ResponseEntity<List<Device>>(list, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Device> findById(@PathVariable Long id){
-        Device device = deviceService.findById(id);
+        Device device = deviceService.findDeviceById(id);
         return new ResponseEntity<Device> (device, HttpStatus.OK);
     }
 

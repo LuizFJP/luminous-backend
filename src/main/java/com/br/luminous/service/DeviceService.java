@@ -1,7 +1,9 @@
 package com.br.luminous.service;
+import com.br.luminous.entity.Address;
 import com.br.luminous.entity.Device;
 import com.br.luminous.exceptions.DatabaseException;
 import com.br.luminous.exceptions.DeviceNotFoundException;
+import com.br.luminous.exceptions.AddressNotFoundException;
 import com.br.luminous.repository.DeviceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,13 +21,14 @@ public class DeviceService {
 
     private DeviceRepository deviceRepository;
 
-    public List<Device> findAll(){
-        return (List<Device>)deviceRepository.findAll();
+    public List<Device> findDevicesByAddressId(Long addressId){
+        Optional<List<Device>> devices = deviceRepository.findByAddressId(addressId);
+        return devices.orElseThrow(AddressNotFoundException::new);
     }
 
-    public Device findById(Long id){
+    public Device findDeviceById(Long id){
         Optional<Device> obj = deviceRepository.findById(id);
-        return obj.orElseThrow(() -> new DeviceNotFoundException());
+        return obj.orElseThrow(DeviceNotFoundException::new);
     }
 
     public Device insert(Device obj){
@@ -44,7 +47,7 @@ public class DeviceService {
 
     public Device update (Long id, Device obj){
         try{
-            Device entity = findById(id);
+            Device entity = findDeviceById(id);
             updateData(entity, obj);
             return deviceRepository.save(entity);
         }catch (EntityNotFoundException e){
@@ -56,9 +59,9 @@ public class DeviceService {
         return response.getId();
     }
 
-    private void updateData(Device entity, Device obj) {
-        entity.setName(obj.getName());
-        entity.setPower(obj.getPower());
-        entity.setUsageTime(obj.getUsageTime());
+    private void updateData(Device device, Device obj) {
+        device.setName(obj.getName());
+        device.setPower(obj.getPower());
+        device.setUsageTime(obj.getUsageTime());
     }
 }
