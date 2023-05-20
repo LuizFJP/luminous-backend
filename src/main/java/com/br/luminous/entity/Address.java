@@ -2,6 +2,7 @@ package com.br.luminous.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import jakarta.persistence.*;
@@ -25,20 +26,17 @@ public class Address {
     private String state;
     private String neighborhood;
 
-    @OneToMany (mappedBy = "address", cascade = CascadeType.REMOVE)
-    @JsonBackReference
-    @JsonIgnoreProperties("devices")
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Device> devices;
 
-    @OneToMany (mappedBy = "address", cascade = CascadeType.REMOVE)
-    @JsonBackReference
-    @JsonIgnoreProperties("energyBills")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<EnergyBill> energyBills;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
-    @JsonIgnoreProperties("user")
     private User user;
 
 }
