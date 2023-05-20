@@ -1,12 +1,14 @@
 package com.br.luminous.controller;
 
-import com.br.luminous.models.WhiteTaxResponse;
+
 import com.br.luminous.service.EnergyBillService;
 import com.br.luminous.entity.EnergyBill;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
 
 import java.util.List;
 

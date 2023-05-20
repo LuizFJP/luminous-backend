@@ -17,4 +17,5 @@ public interface EnergyBillRepository extends CrudRepository<EnergyBill, Long> {
       """)
     List<EnergyBill> findAllByAddressId();
 
+
 }
