@@ -3,6 +3,8 @@ package com.br.luminous.controller;
 import com.br.luminous.entity.BillFile;
 import com.br.luminous.service.BillFileService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +21,8 @@ import java.io.IOException;
 public class BillFileController {
     private BillFileService billFileService;
     @PostMapping("/upload")
-    public ResponseEntity<BillFile> uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-        BillFile billFile = billFileService.uploadBillFile(file);
-        return ResponseEntity.ok(billFile);
+    public ResponseEntity<Long> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        Long id = billFileService.uploadBillFile(file);
+        return new ResponseEntity<Long>(id, HttpStatus.CREATED);
     }
-//    @PostMapping("/upload")
-//    public ResponseEntity<String> uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-//        String uploadedFilePath = BillFileService.upload(file);
-//
-//        return ResponseEntity.ok(uploadedFilePath);
-//        }
 }

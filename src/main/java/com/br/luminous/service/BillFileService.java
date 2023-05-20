@@ -10,15 +10,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class BillFileService {
     private final Path root = Paths.get("uploads");
     private final BillFileRepository billFileRepository;
-    public BillFile uploadBillFile(MultipartFile file) throws IOException {
-        String newFileName = file.getOriginalFilename() + "_" + LocalDateTime.now();
+    public Long uploadBillFile(MultipartFile file) throws IOException {
+
+        String newFileName = LocalDate.now() + file.getOriginalFilename();
         Path pathToFile = this.root.resolve(newFileName);
         Long fileSize = file.getSize();
         try{
@@ -37,6 +40,6 @@ public class BillFileService {
         billFile.setUrl(pathToFile.toString());
 
         billFileRepository.save(billFile);
-        return billFile;
+        return billFile.getId();
     }
 }
