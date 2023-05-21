@@ -14,5 +14,5 @@ public class TariffFlag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate month;
-    private FlagType flagType;
+    private int flagType;
 }
