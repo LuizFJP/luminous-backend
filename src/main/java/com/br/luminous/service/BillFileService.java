@@ -1,6 +1,7 @@
 package com.br.luminous.service;
 
 import com.br.luminous.entity.BillFile;
+import com.br.luminous.exceptions.BillFileNotFoundException;
 import com.br.luminous.repository.BillFileRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Date;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -20,8 +20,8 @@ public class BillFileService {
     private final Path root = Paths.get("uploads");
     private final BillFileRepository billFileRepository;
     public Long uploadBillFile(MultipartFile file) throws IOException {
-
-        String newFileName = LocalDate.now() + file.getOriginalFilename();
+        var unique = new Date().getTime() + Math.round(Math.floor(Math.random() * 1000000));
+        String newFileName =  unique + "_" + file.getOriginalFilename();
         Path pathToFile = this.root.resolve(newFileName);
         Long fileSize = file.getSize();
         try{
@@ -41,5 +41,9 @@ public class BillFileService {
 
         billFileRepository.save(billFile);
         return billFile.getId();
+    }
+    public BillFile getById(Long id){
+        Optional<BillFile> billFile = billFileRepository.findById(id);
+        return billFile.orElseThrow(BillFileNotFoundException::new);
     }
 }

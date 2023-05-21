@@ -19,11 +19,15 @@ public class EnergyBill {
     private LocalDate dueDate;
     private Double energyConsumptionReais;
     private Double energyConsumption_kWh;
-    private String documentBillPath;
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = true)
     @JsonBackReference
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "bill_file_id", nullable = true)
+    @JsonBackReference
+    private BillFile billFile;
 
 }
