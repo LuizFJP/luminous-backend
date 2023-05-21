@@ -10,36 +10,36 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/user/address/devices")
+@RequestMapping("api/device")
 public class DeviceController {
 
     private DeviceService deviceService;
 
-    @GetMapping
-    public ResponseEntity<List<Device>> findAll() {
-        List<Device> list = deviceService.findAll();
-        return ResponseEntity.ok().body(list);
+    @GetMapping("/addresses/{addressId}")
+    public ResponseEntity<List<Device>> getDevicesOfAddress(@PathVariable Long addressId) {
+        List<Device> list = deviceService.findDevicesByAddressId(addressId);
+        return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}/address")
     public ResponseEntity<Device> findById(@PathVariable Long id){
-        Device device = deviceService.findById(id);
+        Device device = deviceService.findDeviceById(id);
         return new ResponseEntity<Device> (device, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/addresses/{addressId}")
     public ResponseEntity<Long> createDevice(@RequestBody Device device, @PathVariable Long addressId){
         Long id = deviceService.create(device, addressId);
         return new ResponseEntity<Long>(id, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Device> update(@PathVariable Long id, @RequestBody Device device){
-        device = deviceService.update(id, device);
-        return new ResponseEntity(HttpStatus.OK);
+    @PutMapping(value = "/{id}/address/{addressId}")
+    public ResponseEntity<Device> update(@PathVariable Long addressId, @PathVariable Long id, @RequestBody Device device){
+        device = deviceService.update(addressId, id, device);
+        return new ResponseEntity(device, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{id}/addresses/{addressId}")
     public ResponseEntity<Void> delete(@PathVariable Long id)  {
         deviceService.delete(id);
         return new ResponseEntity (HttpStatus.OK);

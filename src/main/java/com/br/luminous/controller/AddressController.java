@@ -21,7 +21,7 @@ public class AddressController {
     private AddressRepository addressRepository;
 
 
-    @GetMapping("/user/{userId}/addresses")
+    @GetMapping("/user/{userId}")
     public List<Address> getAddressesOfUser(@PathVariable Long userId) {
         return addressService.getAddressByUserId(userId);
     }
@@ -33,13 +33,13 @@ public class AddressController {
         return new ResponseEntity<Long>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/user/{userId}/addresses/{id}")
+    @PutMapping("{id}/user/{userId}")
     public ResponseEntity<AddressResponse> updateAddressesOfUser(@PathVariable Long userId, @PathVariable Long id, @RequestBody AddressRequest address) {
         addressService.update(userId, id, address);
         return new ResponseEntity(address, HttpStatus.OK);
     }
 
-    @DeleteMapping("/user/{userId}/addresses/{id}")
+    @DeleteMapping("{id}/user/{userId}")
     public ResponseEntity<AddressResponse> deleteAddressesOfUser(@PathVariable Long userId, @PathVariable Long id) {
         addressService.delete(userId, id);
         return new ResponseEntity(HttpStatus.OK);

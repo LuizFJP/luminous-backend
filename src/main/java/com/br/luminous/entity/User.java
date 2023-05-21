@@ -25,10 +25,9 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private LocalDate birthdate;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = CascadeType.ALL)
     @Column(name = "addresses")
     @JsonManagedReference
-    @JsonIgnoreProperties("addresses")
     private List<Address> addresses;
     @ManyToMany()
     @JoinTable(name="users_read_weather_tip", joinColumns = {@JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="id")})
