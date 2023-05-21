@@ -500,3 +500,5 @@ INSERT INTO device (id, name, power, usage_time, address_id)
     VALUES (1, 'Geladeira', 220, '23:59', 10),
            (2, 'Computador', 1200, '06:00', 10),
            (3, 'Microondas', 900, '10:00', 10);
+
+-- INSERT INTO users_read_weather_tip(user_id, id) VALUES (10, 1), (10, 2), (10, 3), (10, 4);

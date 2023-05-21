@@ -1,5 +1,6 @@
 package com.br.luminous.models;
 
+import com.br.luminous.dto.WeatherTipDTO;
 import com.br.luminous.entity.WeatherTip;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +17,13 @@ public class WeatherTipResponse {
     private String city;
     private BigDecimal temperature;
     private BigDecimal feelsLike;
-    private List<WeatherTip> tips;
+    private String tip;
+
+    public WeatherTipResponse(WeatherTipDTO weatherTipDTO, String _tip) {
+        description = weatherTipDTO.getDescription();
+        city = weatherTipDTO.getCity();
+        temperature = weatherTipDTO.getTemperature();
+        feelsLike = weatherTipDTO.getFeelsLike();
+        tip = _tip;
+    }
 }
