@@ -500,3 +500,8 @@ INSERT INTO device (id, name, power, usage_time, address_id)
     VALUES (10, 'Geladeira', 220, '23:59', 10),
            (11, 'Computador', 1200, '06:00', 10),
            (12, 'Microondas', 900, '10:00', 10);
+
+INSERT INTO tariff_flag (month, flag_type)
+    VALUES('2023-02-01', 0),
+          ('2023-03-01', 1),
+          ('2023-04-01', 2);
