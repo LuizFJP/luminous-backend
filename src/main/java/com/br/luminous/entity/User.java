@@ -1,9 +1,7 @@
 package com.br.luminous.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,7 +29,9 @@ public class User implements UserDetails {
     @Column(name = "addresses")
     @JsonManagedReference
     private List<Address> addresses;
-
+    @ManyToMany()
+    @JoinTable(name="users_read_weather_tip", joinColumns = {@JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="id")})
+    private List<WeatherTip> weatherTips;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
