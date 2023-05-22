@@ -53,7 +53,7 @@ public class EnergyBillController {
     public ResponseEntity<ApiResponse<List<EnergyBillResponse>>> getAll(@PathVariable Long address_id) {
         try {
             List<EnergyBillResponse> response = energyBillService.getAll(address_id);
-            ApiResponse<List<EnergyBillResponse>> apiResponse = apiResponseService.createSuccessResponse(response, "All Energy Bill for Address id: " + address_id + "was successfully returned");
+            ApiResponse<List<EnergyBillResponse>> apiResponse = apiResponseService.createSuccessResponse(response, "All Energy Bill for Address id: " + address_id + " was successfully returned");
             return ResponseEntity.ok(apiResponse);
         }catch(AddressNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponseService.createErrorResponse(e.getMessage()));
@@ -64,7 +64,7 @@ public class EnergyBillController {
     public ResponseEntity<ApiResponse<EnergyBillResponse>> update(@PathVariable Long id, @RequestBody EnergyBillRequest energyBillRequest) {
         try {
             EnergyBillResponse response = energyBillService.update(id, energyBillRequest);
-            ApiResponse<EnergyBillResponse> apiResponse = apiResponseService.createSuccessResponse(response, "Energy Bill for id: " + id + "was successfully updated");
+            ApiResponse<EnergyBillResponse> apiResponse = apiResponseService.createSuccessResponse(response, "Energy Bill for id: " + id + " was successfully updated");
             return ResponseEntity.ok(apiResponse);
         } catch (EnergyBillNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponseService.createErrorResponse("Energy Bill was not found for id: " + id));
@@ -75,7 +75,7 @@ public class EnergyBillController {
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         try {
             energyBillService.delete(id);
-            ApiResponse<Void> response = apiResponseService.createSuccessResponse(null, "Energy bill for id: " + id + "was successfully deleted");
+            ApiResponse<Void> response = apiResponseService.createSuccessResponse(null, "Energy bill for id: " + id + " was successfully deleted");
             return ResponseEntity.ok(response);
         }catch(EnergyBillNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponseService.createErrorResponse(e.getMessage()));

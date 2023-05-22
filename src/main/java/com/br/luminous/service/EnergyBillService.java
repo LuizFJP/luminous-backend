@@ -34,7 +34,6 @@ public class EnergyBillService {
         List<EnergyBill> energyBillList = address.getEnergyBills();
         energyBillList.add(energyBill);
         address.setEnergyBills(energyBillList);
-        addressRepository.save(address);
         var energyBillPersisted = energyBillRepository.save(energyBill);
         return energyBillPersisted.getId();
     }
