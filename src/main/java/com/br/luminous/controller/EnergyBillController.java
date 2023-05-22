@@ -38,8 +38,14 @@ public class EnergyBillController {
                 response, HttpStatus.OK);
         }
         @PutMapping("/update/{id}")
-    public ResponseEntity<EnergyBillResponse> update(@PathVariable Long energyBillId, EnergyBillRequest energyBillRequest){
-        EnergyBillResponse energyBillResponse
+    public ResponseEntity<EnergyBillResponse> update(@PathVariable Long id, @RequestBody EnergyBillRequest energyBillRequest){
+            var response = energyBillService.update(id, energyBillRequest);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        @DeleteMapping("/delete/{id}")
+    public ResponseEntity<EnergyBillResponse> delete(@PathVariable Long id){
+            energyBillService.delete(id);
+            return new ResponseEntity(HttpStatus.OK);
         }
 
 }
