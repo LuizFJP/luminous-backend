@@ -34,6 +34,7 @@ public class EnergyBillService {
         List<EnergyBill> energyBillList = address.getEnergyBills();
         energyBillList.add(energyBill);
         address.setEnergyBills(energyBillList);
+        addressRepository.save(address);
         var energyBillPersisted = energyBillRepository.save(energyBill);
         return energyBillPersisted.getId();
     }
@@ -56,14 +57,18 @@ public class EnergyBillService {
         return energyBillResponseList;
     }
     public EnergyBillResponse update(Long id, EnergyBillRequest energyBillRequest){
-        EnergyBill energyBill = energyBillRepository.findById(id).get();
-        energyBill.setReferenceDate(energyBillRequest.getReferenceDate());
-        energyBill.setDueDate(energyBillRequest.getDueDate());
-        energyBill.setEnergyConsumptionReais(energyBillRequest.getEnergyConsumptionReais());
-        energyBill.setEnergyConsumption_kWh(energyBillRequest.getEnergyConsumption_kWh());
-        energyBillRepository.save(energyBill);
-        var response = energyBillToResponse.mapper(energyBill);
-        return response;
+        try {
+            EnergyBill energyBill = energyBillRepository.findById(id).get();
+            energyBill.setReferenceDate(energyBillRequest.getReferenceDate());
+            energyBill.setDueDate(energyBillRequest.getDueDate());
+            energyBill.setEnergyConsumptionReais(energyBillRequest.getEnergyConsumptionReais());
+            energyBill.setEnergyConsumption_kWh(energyBillRequest.getEnergyConsumption_kWh());
+            energyBillRepository.save(energyBill);
+            var response = energyBillToResponse.mapper(energyBill);
+            return response;
+        }catch (EnergyBillNotFoundException e){
+            throw e;
+        }
     }
 
     public void delete(Long id) {
