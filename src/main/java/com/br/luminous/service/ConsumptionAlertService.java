@@ -4,6 +4,8 @@ import com.br.luminous.controller.ConsumptionAlertController;
 import com.br.luminous.entity.ConsumptionAlert;
 import com.br.luminous.exceptions.ConsumptionAlertNotFound;
 import com.br.luminous.exceptions.UserNotFoundException;
+import com.br.luminous.mapper.ConsumptionAlertRequestToEntity;
+import com.br.luminous.models.ConsumptionAlertRequest;
 import com.br.luminous.repository.ConsumptionAlertRepository;
 import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -18,10 +20,13 @@ public class ConsumptionAlertService {
     private ConsumptionAlertRepository consumptionAlertRepository;
     private UserService userService;
     private UserRepository userRepository;
+    private ConsumptionAlertRequestToEntity consumptionAlertRequestToEntity;
 
-    public Long create(Long user_id, ConsumptionAlert consumptionAlert){
+    public Long create(Long user_id, ConsumptionAlertRequest consumptionAlertRequest){
         try {
             var user = userService.getUserById(user_id);
+            var consumptionAlert = consumptionAlertRequestToEntity.mapper(consumptionAlertRequest);
+            consumptionAlert.setUser(user);
             var consumptionAlertsList = user.getConsumptionAlerts();
             consumptionAlertsList.add(consumptionAlert);
             user.setConsumptionAlerts(consumptionAlertsList);
@@ -36,10 +41,11 @@ public class ConsumptionAlertService {
         var response = consumptionAlertRepository.findById(id);
         return response.orElseThrow(ConsumptionAlertNotFound::new);
     }
-    public ConsumptionAlert update(Long id, ConsumptionAlert consumptionAlert){
+    public ConsumptionAlert update(Long id, ConsumptionAlertRequest consumptionAlertRequest){
         var consumptionAlertToUpdate = consumptionAlertRepository.findById(id).get();
-        consumptionAlertToUpdate.setConsumptionLimit(consumptionAlert.getConsumptionLimit());
-        consumptionAlertToUpdate.setDescricao(consumptionAlert.getDescricao());
+
+        consumptionAlertToUpdate.setConsumptionLimit(consumptionAlertRequest.getConsumptionLimit());
+        consumptionAlertToUpdate.setDescricao(consumptionAlertRequest.getDescricao());
         var response = consumptionAlertRepository.save(consumptionAlertToUpdate);
         return response;
     }

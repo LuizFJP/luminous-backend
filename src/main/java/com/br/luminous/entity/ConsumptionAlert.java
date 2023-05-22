@@ -17,7 +17,7 @@ public class ConsumptionAlert {
     private double consumptionLimit;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = true)
     @JsonBackReference
     private User user;
 }
