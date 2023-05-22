@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnergyProviderResponse {
+public class BillFileResponse {
+    private String url;
     private String name;
-
-    private String urlMaintenance;
-
-    private String urlEnergyFall;
+    private Long size;
 }
