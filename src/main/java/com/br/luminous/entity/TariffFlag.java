@@ -1,5 +1,6 @@
 package com.br.luminous.entity;
 
+import com.br.luminous.enums.FlagType;
 import jakarta.persistence.*;
 import lombok.Data;
 
