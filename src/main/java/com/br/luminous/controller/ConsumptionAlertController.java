@@ -35,10 +35,7 @@ public class ConsumptionAlertController {
     @GetMapping("/{id}")
     public ResponseEntity<ConsumptionAlert> getConsumptionAlert(@PathVariable Long id){
         var response = consumptionAlertService.get(id);
-        if(response != null){
-            return new ResponseEntity<ConsumptionAlert>(response, HttpStatus.OK);
-        }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<ConsumptionAlert>(response, HttpStatus.OK);
     }
     @GetMapping("/getAll/user/{id}")
     public ResponseEntity<List<ConsumptionAlert>> getAll(@PathVariable Long id){
