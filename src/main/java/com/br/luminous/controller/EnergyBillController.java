@@ -37,12 +37,12 @@ public class EnergyBillController {
         return new ResponseEntity<List<EnergyBillResponse>>(
                 response, HttpStatus.OK);
         }
-        @PutMapping("/update/{id}")
+        @PutMapping("/{id}")
     public ResponseEntity<EnergyBillResponse> update(@PathVariable Long id, @RequestBody EnergyBillRequest energyBillRequest){
             var response = energyBillService.update(id, energyBillRequest);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
-        @DeleteMapping("/delete/{id}")
+        @DeleteMapping("/{id}")
     public ResponseEntity<EnergyBillResponse> delete(@PathVariable Long id){
             energyBillService.delete(id);
             return new ResponseEntity(HttpStatus.OK);
