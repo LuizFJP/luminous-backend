@@ -1,6 +1,7 @@
 package com.br.luminous.controller;
 
 import com.br.luminous.entity.ConsumptionAlert;
+import com.br.luminous.models.ConsumptionAlertRequest;
 import com.br.luminous.service.ConsumptionAlertService;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
@@ -17,13 +18,13 @@ import java.util.List;
 public class ConsumptionAlertController {
     ConsumptionAlertService consumptionAlertService;
     @PostMapping("/user/{id}")
-    public ResponseEntity<Long> create(@PathVariable Long user_id, @RequestBody ConsumptionAlert consumptionAlert){
-        Long id = consumptionAlertService.create(user_id, consumptionAlert);
-        return new ResponseEntity<>(id, HttpStatus.CREATED);
+    public ResponseEntity<Long> create(@PathVariable Long id, @RequestBody ConsumptionAlertRequest consumptionAlertRequest){
+            Long consumptionAlertId = consumptionAlertService.create(id, consumptionAlertRequest);
+            return new ResponseEntity<>(consumptionAlertId, HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<ConsumptionAlert> update(@PathVariable Long id, @RequestBody ConsumptionAlert consumptionAlert){
-        var response = consumptionAlertService.update(id, consumptionAlert);
+    public ResponseEntity<ConsumptionAlert> update(@PathVariable Long id, @RequestBody ConsumptionAlertRequest consumptionAlertRequest){
+        var response = consumptionAlertService.update(id, consumptionAlertRequest);
         return new ResponseEntity(response, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
@@ -40,8 +41,8 @@ public class ConsumptionAlertController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @GetMapping("/getAll/user/{id}")
-    public ResponseEntity<List<ConsumptionAlert>> getAll(@PathVariable Long user_id){
-        var response = consumptionAlertService.getAll(user_id);
+    public ResponseEntity<List<ConsumptionAlert>> getAll(@PathVariable Long id){
+        var response = consumptionAlertService.getAll(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
