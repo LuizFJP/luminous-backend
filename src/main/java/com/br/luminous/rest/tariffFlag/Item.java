@@ -1,4 +1,4 @@
-package com.br.luminous.mapper;
+package com.br.luminous.rest.tariffFlag;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class TariffFlagDTO {
+public class Item {
 
     @JsonProperty("id")
     private long id;
