@@ -1,8 +1,11 @@
 package com.br.luminous.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Data
@@ -19,4 +22,13 @@ public class EnergyProvider {
     private String urlMaintenance;
     @Column(name = "url_energy_fall")
     private String urlEnergyFall;
+
+    @OneToOne
+    @JoinColumn(name = "white_tax_id")
+    private WhiteTax whiteTax;
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "addresses")
+    @JsonManagedReference
+    private List<Address> addresses;
+
 }

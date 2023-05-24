@@ -1,10 +1,8 @@
 package com.br.luminous.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import org.springframework.lang.Nullable;
+
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -21,11 +19,15 @@ public class EnergyBill {
     private LocalDate dueDate;
     private Double energyConsumptionReais;
     private Double energyConsumption_kWh;
-    private String documentBillPath;
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = true)
     @JsonBackReference
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "bill_file_id", nullable = true)
+    @JsonBackReference
+    private BillFile billFile;
 
 }

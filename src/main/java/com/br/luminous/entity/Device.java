@@ -3,6 +3,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import jakarta.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -14,6 +16,10 @@ public class Device {
     private String name;
     private float power;
     private LocalTime usageTime;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="device")
+    @JsonManagedReference
+    private List<Consumption> consumptionPerDay;
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)

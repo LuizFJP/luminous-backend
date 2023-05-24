@@ -18,8 +18,6 @@ import java.util.List;
 public class AddressController {
 
     private AddressService addressService;
-    private AddressRepository addressRepository;
-
 
     @GetMapping("/user/{userId}")
     public List<Address> getAddressesOfUser(@PathVariable Long userId) {
