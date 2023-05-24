@@ -30,7 +30,7 @@ public class Address {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Device> devices;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="address")
     @JsonManagedReference
     private List<EnergyBill> energyBills;
 

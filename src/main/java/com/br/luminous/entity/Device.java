@@ -6,6 +6,7 @@ import lombok.Data;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 
+
 @Entity
 @Data
 @Table(name ="device")
