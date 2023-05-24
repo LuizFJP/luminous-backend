@@ -1,6 +1,7 @@
 package com.br.luminous.controller;
 
 import com.br.luminous.entity.ConsumptionAlert;
+import com.br.luminous.exceptions.AddressNotFoundException;
 import com.br.luminous.exceptions.ConsumptionAlertNotFound;
 import com.br.luminous.exceptions.UserNotFoundException;
 import com.br.luminous.models.ApiResponse;
@@ -23,14 +24,16 @@ public class ConsumptionAlertController {
     ConsumptionAlertService consumptionAlertService;
 
     ApiResponseService apiResponseService;
-    @PostMapping("/user/{id}")
+    @PostMapping("/address/{id}")
     public ResponseEntity<ApiResponse<Long>> create(@PathVariable Long id, @RequestBody ConsumptionAlertRequest consumptionAlertRequest) {
         try {
             Long consumptionAlertId = consumptionAlertService.create(id, consumptionAlertRequest);
             ApiResponse<Long> response = apiResponseService.createSuccessResponse(consumptionAlertId, "Consumption Alert was successfully created");
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (UserNotFoundException e) {
+        } catch (AddressNotFoundException exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponseService.createErrorResponse("User was not found for id: " + id));
+        }catch(IllegalArgumentException exception){
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(apiResponseService.createErrorResponse(exception.getMessage()));
         }
     }
 
@@ -40,7 +43,7 @@ public class ConsumptionAlertController {
             ConsumptionAlert updatedAlert = consumptionAlertService.update(id, consumptionAlertRequest);
             ApiResponse<ConsumptionAlert> response = apiResponseService.createSuccessResponse(updatedAlert, "Consumption Alert was successfully updated");
             return ResponseEntity.ok(response);
-        } catch (ConsumptionAlertNotFound e) {
+        } catch (ConsumptionAlertNotFound exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponseService.createErrorResponse("Consumption Alert was not found for id: " + id));
         }
     }
@@ -51,7 +54,7 @@ public class ConsumptionAlertController {
             consumptionAlertService.delete(id);
             ApiResponse<Void> response = apiResponseService.createSuccessResponse(null, "Consumption Alert for id: " + id + "was successfully deleted");
             return ResponseEntity.ok(response);
-        } catch (ConsumptionAlertNotFound e) {
+        } catch (ConsumptionAlertNotFound exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponseService.createErrorResponse("Consumption Alert was not found for id: " + id));
         }
     }
@@ -62,17 +65,17 @@ public class ConsumptionAlertController {
             ConsumptionAlert response = consumptionAlertService.get(id);
             ApiResponse<ConsumptionAlert> apiResponse = apiResponseService.createSuccessResponse(response, "Consumption Alert with id: " + id + "was successfully returned");
             return ResponseEntity.ok(apiResponse);
-        } catch (ConsumptionAlertNotFound e) {
+        } catch (ConsumptionAlertNotFound exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponseService.createErrorResponse("Consumption Alert was not found for id: " + id));
         }
     }
 
-    @GetMapping("/getAll/user/{id}")
+    @GetMapping("/getAll/address/{id}")
     public ResponseEntity<ApiResponse<List<ConsumptionAlert>>> getAll(@PathVariable Long id) {
         try {
             List<ConsumptionAlert> response = consumptionAlertService.getAll(id);
                 return ResponseEntity.ok(apiResponseService.createSuccessResponse(response, "All Consumption Alerts from user " + id + " were returned"));
-        } catch (UserNotFoundException e) {
+        } catch (UserNotFoundException exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponseService.createErrorResponse("Consumption Alerts not found for user: " + id));
         }
     }

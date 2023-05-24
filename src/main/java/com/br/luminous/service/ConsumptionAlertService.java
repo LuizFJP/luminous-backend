@@ -5,7 +5,6 @@ import com.br.luminous.exceptions.ConsumptionAlertNotFound;
 import com.br.luminous.mapper.ConsumptionAlertRequestToEntity;
 import com.br.luminous.models.ConsumptionAlertRequest;
 import com.br.luminous.repository.ConsumptionAlertRepository;
-import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +15,17 @@ import java.util.List;
 public class ConsumptionAlertService {
 
     private ConsumptionAlertRepository consumptionAlertRepository;
-    private UserService userService;
-    private UserRepository userRepository;
+    private AddressService addressService;
     private ConsumptionAlertRequestToEntity consumptionAlertRequestToEntity;
 
-    public Long create(Long user_id, ConsumptionAlertRequest consumptionAlertRequest){
+    public Long create(Long address_id, ConsumptionAlertRequest consumptionAlertRequest){
         try {
-            var user = userService.getUserById(user_id);
+            var address = addressService.getAddressById(address_id);
             var consumptionAlert = consumptionAlertRequestToEntity.mapper(consumptionAlertRequest);
-            consumptionAlert.setUser(user);
-            var consumptionAlertsList = user.getConsumptionAlerts();
+            consumptionAlert.setAddress(address);
+            var consumptionAlertsList = address.getConsumptionAlerts();
             consumptionAlertsList.add(consumptionAlert);
-            user.setConsumptionAlerts(consumptionAlertsList);
-//            userRepository.save(user);
+            address.setConsumptionAlerts(consumptionAlertsList);
             var consumptionAlertPersisted = consumptionAlertRepository.save(consumptionAlert);
             return consumptionAlertPersisted.getId();
         }catch(Exception e){
@@ -50,9 +47,9 @@ public class ConsumptionAlertService {
             throw e;
         }
     }
-    public List<ConsumptionAlert> getAll(Long user_id){
-        var user = userService.getUserById(user_id);
-        var consumptionAlertList = user.getConsumptionAlerts();
+    public List<ConsumptionAlert> getAll(Long address_id){
+        var address = addressService.getAddressById(address_id);
+        var consumptionAlertList = address.getConsumptionAlerts();
         return consumptionAlertList;
     }
     public void delete(Long consumptionAlert_id){

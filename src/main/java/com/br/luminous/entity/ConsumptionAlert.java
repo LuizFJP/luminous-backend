@@ -1,5 +1,6 @@
 package com.br.luminous.entity;
 
+import com.br.luminous.enums.ConsumptionAlertType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,8 +17,11 @@ public class ConsumptionAlert {
 
     private double consumptionLimit;
 
+    @Enumerated(EnumType.STRING)
+    private ConsumptionAlertType consumptionAlertType;
+
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
+    @JoinColumn(name = "address_id", nullable = true)
     @JsonBackReference
-    private User user;
+    private Address address;
 }

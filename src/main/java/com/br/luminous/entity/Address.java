@@ -39,4 +39,8 @@ public class Address {
     @JsonBackReference
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
+    @Column(name = "consumption_alerts")
+    @JsonManagedReference
+    private List<ConsumptionAlert> consumptionAlerts;
 }

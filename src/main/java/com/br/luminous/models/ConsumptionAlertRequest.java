@@ -12,4 +12,6 @@ public class ConsumptionAlertRequest {
     private String descricao;
 
     private double consumptionLimit;
+
+    private String consumptionAlertType;
 }

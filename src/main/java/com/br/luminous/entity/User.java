@@ -33,10 +33,6 @@ public class User implements UserDetails {
     @JoinTable(name="users_read_weather_tip", joinColumns = {@JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="id")})
     private List<WeatherTip> weatherTips;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @Column(name = "consumption_alerts")
-    @JsonManagedReference
-    private List<ConsumptionAlert> consumptionAlerts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
