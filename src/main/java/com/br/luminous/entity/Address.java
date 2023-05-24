@@ -39,4 +39,9 @@ public class Address {
     @JsonBackReference
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "energy_provider", nullable = true)
+    @JsonBackReference
+    private EnergyProvider energyProvider;
+
 }
