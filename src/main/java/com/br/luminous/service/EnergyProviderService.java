@@ -24,20 +24,21 @@ public class EnergyProviderService {
         return response.getId();
     }
 
+
     public EnergyProvider getEnergyProviderById(Long id){
         Optional<EnergyProvider> EnergyProvider = energyProviderRepository.findById(id);
         return EnergyProvider.orElseThrow(EnergyProviderNotFoundException::new);
     }
 
-    public EnergyProvider getEnergyProviderByName(String name){
-        Optional<EnergyProvider> energyProvider = energyProviderRepository.findByCompanyName(name);
+    public EnergyProvider getEnergyProviderByName(String companyName){
+        Optional<EnergyProvider> energyProvider = energyProviderRepository.findByCompanyName(companyName);
         return energyProvider.orElseThrow(EnergyProviderNotFoundException::new);
     }
 
 
-    public EnergyProviderResponse get(String name){
+    public EnergyProviderResponse get(String companyName){
         try {
-            var energyProvider = getEnergyProviderByName(name);
+            var energyProvider = getEnergyProviderByName(companyName);
             var energyProviderResponse = new EnergyProviderResponse();
             BeanUtils.copyProperties(energyProvider, energyProviderResponse);
             return energyProviderResponse;
@@ -50,7 +51,7 @@ public class EnergyProviderService {
         try {
             EnergyProvider energyProvider = getEnergyProviderById(id);
             BeanUtils.copyProperties(energyProviderRequest, energyProvider);
-            energyProvider.setCompanyName(energyProviderRequest.getName());
+            energyProvider.setCompanyName(energyProviderRequest.getCompanyName());
             energyProvider.setUrlMaintenance(energyProviderRequest.getUrlMaintenance());
             energyProvider.setUrlEnergyFall(energyProviderRequest.getUrlEnergyFall());
             energyProviderRepository.save(energyProvider);

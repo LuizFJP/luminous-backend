@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnergyProviderResponse {
-    private String name;
+    private String companyName;
 
     private String urlMaintenance;
 

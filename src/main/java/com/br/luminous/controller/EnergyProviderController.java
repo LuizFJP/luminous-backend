@@ -17,9 +17,9 @@ public class EnergyProviderController {
 
     private EnergyProviderService energyProviderService;
 
-    @RequestMapping("/{name}")
-    public ResponseEntity<EnergyProvider> getEnergyProviderByName(@PathVariable String name) {
-        EnergyProvider energyProvider = energyProviderService.getEnergyProviderByName(name);
+    @RequestMapping("/{companyName}")
+    public ResponseEntity<EnergyProvider> getEnergyProviderByName(@PathVariable String companyName) {
+        EnergyProvider energyProvider = energyProviderService.getEnergyProviderByName(companyName);
         return new ResponseEntity<EnergyProvider>(energyProvider, HttpStatus.OK);
     }
 

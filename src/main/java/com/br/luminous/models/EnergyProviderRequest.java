@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnergyProviderRequest {
-    private String name;
+    private String companyName;
     private String urlMaintenance;
     private String urlEnergyFall;
 }
