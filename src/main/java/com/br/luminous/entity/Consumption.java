@@ -3,9 +3,11 @@ package com.br.luminous.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "consumption")
 public class Consumption {
 
@@ -20,7 +22,6 @@ public class Consumption {
     @JsonBackReference
     private Device device;
 
-    public Consumption() {}
     public Consumption(double energyConsumptionKWh, Device device){
         this.energyConsumptionKWh = energyConsumptionKWh;
         this.device = device;
@@ -30,4 +31,5 @@ public class Consumption {
     private double getTaxes(){
         return 0;
     }
+
 }
