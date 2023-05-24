@@ -29,7 +29,6 @@ public class Consumption {
     }
 
     private double getTaxes(){
-        return 0;
+        return device.getAddress().getEnergyProvider().getWhiteTax().getRegularPrice();
     }
-
 }
