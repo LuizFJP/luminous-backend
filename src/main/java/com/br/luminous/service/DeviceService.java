@@ -35,17 +35,11 @@ public class DeviceService {
         return obj.orElseThrow(DeviceNotFoundException::new);
     }
 
-    public Device insert(Device obj){
-        return deviceRepository.save(obj);
-    }
-
     public void delete (Long id){
         try{
             deviceRepository.deleteById(id);
         }catch(EmptyResultDataAccessException e){
             throw new DeviceNotFoundException();
-        }catch(DataIntegrityViolationException e){
-            throw new DatabaseException("non-existent device");
         }
     }
 
