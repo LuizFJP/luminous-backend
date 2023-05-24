@@ -497,6 +497,7 @@ INSERT INTO address (id, city, cep, street, neighborhood, house_number, input_vo
 insert INTO users_addresses (user_user_id, addresses_id) VALUES(10,10);
 
 INSERT INTO device (id, name, power, usage_time, address_id)
-    VALUES (1, 'Geladeira', 220, '23:59', 10),
-           (2, 'Computador', 1200, '06:00', 10),
-           (3, 'Microondas', 900, '10:00', 10);
+    VALUES (10, 'Geladeira', 220, '23:59', 10),
+           (11, 'Computador', 1200, '06:00', 10),
+           (12, 'Microondas', 900, '10:00', 10);
+
