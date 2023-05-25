@@ -26,8 +26,9 @@ public class Address {
     private String state;
     private String neighborhood;
 
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Device> devices;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="address")
