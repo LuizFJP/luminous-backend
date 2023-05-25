@@ -21,7 +21,7 @@ public class BillFileController {
     public ResponseEntity<Object> uploadFile(MultipartFile file) {
         try {
             Long id = billFileService.uploadBillFile(file);
-            return ResponseEntity.status(HttpStatus.CREATED).body("File was successfully uploaded with ID: " + id);
+            return ResponseEntity.status(HttpStatus.CREATED).body(id);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading file.");
         }
