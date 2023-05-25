@@ -4,16 +4,12 @@ import com.br.luminous.entity.Device;
 import com.br.luminous.exceptions.DeviceNotFoundException;
 import com.br.luminous.exceptions.AddressNotFoundException;
 import com.br.luminous.mapper.DeviceRequestToEntity;
-import com.br.luminous.models.AddressResponse;
 import com.br.luminous.models.DeviceRequest;
 import com.br.luminous.models.DeviceResponse;
-import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.repository.DeviceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +38,7 @@ public class DeviceService {
         try{
             findDeviceById(id);
             deviceRepository.deleteById(id);
-        }catch(EmptyResultDataAccessException e){
+        }catch(RuntimeException e){
             throw new DeviceNotFoundException();
         }
     }
