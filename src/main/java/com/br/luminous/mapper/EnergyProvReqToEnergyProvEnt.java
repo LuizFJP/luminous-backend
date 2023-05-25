@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class EnergyProvReqToEnergyProvEnt {
     public EnergyProvider mapper(EnergyProviderRequest energyProviderRequest) {
         var energyProvider = new EnergyProvider();
-        BeanUtils.copyProperties(energyProvider, energyProviderRequest);
+        BeanUtils.copyProperties(energyProviderRequest, energyProvider);
         return energyProvider;
     }
 }

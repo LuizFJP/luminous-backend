@@ -43,4 +43,10 @@ public class Address {
     @Column(name = "consumption_alerts")
     @JsonManagedReference
     private List<ConsumptionAlert> consumptionAlerts;
+
+    @ManyToOne
+    @JoinColumn(name = "energy_provider", nullable = true)
+    @JsonBackReference
+    private EnergyProvider energyProvider;
+
 }
