@@ -1,13 +1,16 @@
 package com.br.luminous.service;
 import com.br.luminous.entity.Address;
 import com.br.luminous.entity.Device;
-import com.br.luminous.exceptions.DatabaseException;
 import com.br.luminous.exceptions.DeviceNotFoundException;
 import com.br.luminous.exceptions.AddressNotFoundException;
+import com.br.luminous.mapper.DeviceRequestToEntity;
+import com.br.luminous.models.AddressResponse;
+import com.br.luminous.models.DeviceRequest;
+import com.br.luminous.models.DeviceResponse;
 import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.repository.DeviceRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +25,7 @@ public class DeviceService {
 
     private DeviceRepository deviceRepository;
     private AddressService addressService;
-    private AddressRepository addressRepository;
+    private final DeviceRequestToEntity deviceRequestToEntity = new DeviceRequestToEntity();
 
     public List<Device> findDevicesByAddressId(Long addressId){
         Optional<List<Device>>
@@ -37,33 +40,43 @@ public class DeviceService {
 
     public void delete (Long id){
         try{
+            findDeviceById(id);
             deviceRepository.deleteById(id);
         }catch(EmptyResultDataAccessException e){
             throw new DeviceNotFoundException();
         }
     }
 
-    public Device update (Long addressId, Long id, Device obj){
+    public DeviceResponse update (Long id, DeviceRequest deviceRequest, Long addressId){
         try{
             Device entity = findDeviceById(id);
-            updateData(entity, obj);
-            return deviceRepository.save(entity);
+            BeanUtils.copyProperties(deviceRequest, entity);
+
+            updateData(entity, deviceRequest);
+            deviceRepository.save(entity);
+
+            DeviceResponse deviceResponse = new DeviceResponse();
+            BeanUtils.copyProperties(entity, deviceResponse);
+            return deviceResponse;
+
         }catch (EntityNotFoundException e){
             throw new DeviceNotFoundException();
         }
     }
-    public Long create(Device device, Long addressId){
+    public Long create(DeviceRequest deviceRequest, Long addressId){
+        Device device = deviceRequestToEntity.mapper(deviceRequest);
         Address address = updateAddressDevices(addressId, device);
+
         device.setAddress(address);
         Device response = deviceRepository.save(device);
-        addressRepository.save(address);
+        deviceRepository.save(device);
         return response.getId();
     }
 
-    private void updateData(Device device, Device obj) {
-        device.setName(obj.getName());
-        device.setPower(obj.getPower());
-        device.setUsageTime(obj.getUsageTime());
+    private void updateData(Device device, DeviceRequest request) {
+        device.setName(request.getName());
+        device.setPower(request.getPower());
+        device.setUsageTime(request.getUsageTime());
     }
 
     private Address updateAddressDevices(Long addressId, Device device){

@@ -14,5 +14,5 @@ public class DeviceResponse {
     private String name;
     private float power;
     private LocalTime usageTime;
-    private Address address;
+    private AddressResponse addressResponse;
 }

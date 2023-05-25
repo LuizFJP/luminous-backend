@@ -14,5 +14,4 @@ public class DeviceRequest {
     private String name;
     private float power;
     private LocalTime usageTime;
-    private Address address;
 }
