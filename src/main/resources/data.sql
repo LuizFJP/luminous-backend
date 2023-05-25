@@ -505,4 +505,3 @@ INSERT INTO tariff_flag (month, flag_type)
     VALUES('2023-02-01', 0),
           ('2023-03-01', 1),
           ('2023-04-01', 2);
-
