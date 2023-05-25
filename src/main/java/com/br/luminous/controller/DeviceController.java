@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/devices")
+@RequestMapping("api/device")
 public class DeviceController {
 
     private DeviceService deviceService;
@@ -23,7 +23,7 @@ public class DeviceController {
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    @PostMapping("newDevice/address/{addressId}")
+    @PostMapping("/address/{addressId}")
     public ResponseEntity<Long> createDevice(@RequestBody DeviceRequest device, @PathVariable Long addressId){
         Long response = deviceService.create(device, addressId);
         return new ResponseEntity<Long>(response, HttpStatus.CREATED);

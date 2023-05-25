@@ -19,7 +19,7 @@ public class Device {
     private LocalTime usageTime;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="device")
-    @JsonBackReference
+    @JsonManagedReference
     private List<Consumption> consumptionPerDay;
 
     @ManyToOne

@@ -46,9 +46,9 @@ public class DeviceService {
     public DeviceResponse update (Long id, DeviceRequest deviceRequest, Long addressId){
         try{
             Device entity = findDeviceById(id);
-            BeanUtils.copyProperties(deviceRequest, entity);
+            Device request = deviceRequestToEntity.mapper(deviceRequest);
 
-            updateData(entity, deviceRequest);
+            updateData(entity, request);
             deviceRepository.save(entity);
 
             DeviceResponse deviceResponse = new DeviceResponse();
@@ -69,7 +69,7 @@ public class DeviceService {
         return response.getId();
     }
 
-    private void updateData(Device device, DeviceRequest request) {
+    private void updateData(Device device, Device request) {
         device.setName(request.getName());
         device.setPower(request.getPower());
         device.setUsageTime(request.getUsageTime());
