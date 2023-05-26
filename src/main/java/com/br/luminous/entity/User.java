@@ -29,7 +29,7 @@ public class User implements UserDetails {
     @Column(name = "addresses")
     @JsonManagedReference
     private List<Address> addresses;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @Column(name = "tokens")
     @JsonManagedReference
     private List<Token> tokens;
