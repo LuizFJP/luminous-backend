@@ -25,7 +25,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private LocalDate birthdate;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Column(name = "addresses")
     @JsonManagedReference
     private List<Address> addresses;
@@ -37,6 +37,8 @@ public class User implements UserDetails {
     @ManyToMany()
     @JoinTable(name="users_read_weather_tip", joinColumns = {@JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="id")})
     private List<WeatherTip> weatherTips;
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

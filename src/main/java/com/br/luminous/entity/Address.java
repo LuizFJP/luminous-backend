@@ -26,11 +26,12 @@ public class Address {
     private String state;
     private String neighborhood;
 
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Device> devices;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="address")
     @JsonManagedReference
     private List<EnergyBill> energyBills;
 
@@ -38,5 +39,15 @@ public class Address {
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
+    @Column(name = "consumption_alerts")
+    @JsonManagedReference
+    private List<ConsumptionAlert> consumptionAlerts;
+
+    @ManyToOne
+    @JoinColumn(name = "energy_provider", nullable = true)
+    @JsonBackReference
+    private EnergyProvider energyProvider;
 
 }
