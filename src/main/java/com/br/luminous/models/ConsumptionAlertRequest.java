@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConsumptionAlertRequest {
-    private String descricao;
+    private String description;
 
     private double consumptionLimit;
 
