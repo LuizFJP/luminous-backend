@@ -28,20 +28,17 @@ public class AuthenticationService {
     private final UserService userService;
 
 
-    public AuthenticationResponse register(UserRequest userRequest) {
+    public Long register(UserRequest userRequest) {
         try {
             userService.checkEmailAlreadyExists(userRequest.getEmail());
             var user = new User();
             BeanUtils.copyProperties(userRequest, user);
             user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
             User savedUser = userRepository.save(user);
-            var jwtToken = jwtService.generateToken(user, user.getId());
-            saveUserToken(savedUser, jwtToken);
-            return new AuthenticationResponse(jwtToken);
-        } catch(EmailAlreadyExistsException e) {
-            throw e;
+            return savedUser.getId();
+        } catch(EmailAlreadyExistsException emailAlreadyExistsException) {
+            throw emailAlreadyExistsException;
         }
-
 
     }
 

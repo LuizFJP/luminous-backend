@@ -29,6 +29,11 @@ public class User implements UserDetails {
     @Column(name = "addresses")
     @JsonManagedReference
     private List<Address> addresses;
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "tokens")
+    @JsonManagedReference
+    private List<Token> tokens;
+
     @ManyToMany()
     @JoinTable(name="users_read_weather_tip", joinColumns = {@JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="id")})
     private List<WeatherTip> weatherTips;
