@@ -25,7 +25,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private LocalDate birthdate;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Column(name = "addresses")
     @JsonManagedReference
     private List<Address> addresses;
