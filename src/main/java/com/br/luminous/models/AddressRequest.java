@@ -18,6 +18,8 @@ public class AddressRequest {
     private int houseNumber;
     private int inputVoltage;
     private String street;
-    private String state;
     private String neighborhood;
+    private String state;
+    private String nickname;
+    private boolean mainAddress;
 }

@@ -23,9 +23,11 @@ public class Address {
     private int houseNumber;
     private int inputVoltage;
     private String street;
-    private String state;
     private String neighborhood;
-
+    private String state;
+    private String nickname;
+    @Column(name = "main_address", nullable = false)
+    private boolean mainAddress;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
     @JsonManagedReference
