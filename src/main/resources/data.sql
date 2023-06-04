@@ -488,12 +488,10 @@ INSERT INTO users (user_id, name, phone, user_name, email, password, birthdate)
     VALUES (10, 'Testador', '123456789', 'tester', 'email@email', '$2a$10$xEnEKVKE2nkt.BRidai5ZOT.Qk4f93TQLAYui1gL7/2S4wJ/QddJO', '1950-12-12');
 
 
-INSERT INTO address (id, state, city, cep, street, neighborhood, house_number, input_voltage, user_id, energy_provider_id)
-    VALUES (10, 'SP','São Paulo', '00000-000', 'Avenida Paulista', 'cachoeirinha do grau' , 123, 110, 10, 76);
+INSERT INTO address (id, main_address, state, city, cep, street, neighborhood, house_number, input_voltage, user_id, energy_provider_id)
+    VALUES (10, true, 'SP','São Paulo', '00000-000', 'Avenida Paulista', 'cachoeirinha do grau' , 123, 110, 10, 76);
 --            (20, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 234, 110, 10),
 --            (30, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 345, 220, 10);
-
-insert INTO users_addresses (user_user_id, addresses_id) VALUES(10,10);
 
 INSERT INTO device (id, name, power, usage_time, address_id)
     VALUES (10, 'Geladeira', 220, '23:59', 10),

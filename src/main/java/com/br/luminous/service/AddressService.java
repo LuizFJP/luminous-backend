@@ -62,6 +62,9 @@ public class AddressService {
             address.setCep(addressRequest.getCep());
             address.setHouseNumber(addressRequest.getHouseNumber());
             address.setInputVoltage(addressRequest.getInputVoltage());
+            address.setNeighborhood(addressRequest.getNeighborhood());
+            address.setNickname(addressRequest.getNickname());
+            address.setMainAddress(addressRequest.isMainAddress());
             addressRepository.save(address);
             var addressResponse = new AddressResponse();
             BeanUtils.copyProperties(address, addressResponse);
@@ -89,6 +92,16 @@ public class AddressService {
         return user;
     }
 
+    public Address getMainAddress(Long userId) {
+        Optional<List<Address>> optionalAddresses = addressRepository.findByUserId(userId);
+        List<Address> addresses = optionalAddresses.orElseThrow(UserNotFoundException::new);
+        for (Address address : addresses) {
+            if (address.isMainAddress()) {
+                return address;
+            }
+        }
+        throw new AddressNotFoundException();
+    }
 
 }
 

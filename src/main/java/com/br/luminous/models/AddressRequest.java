@@ -13,7 +13,9 @@ public class AddressRequest {
     private int houseNumber;
     private int inputVoltage;
     private String street;
-    private String state;
     private String neighborhood;
     private Long energyProviderId;
+    private String state;
+    private String nickname;
+    private boolean mainAddress;
 }
