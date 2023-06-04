@@ -46,7 +46,7 @@ public class Address {
     private List<ConsumptionAlert> consumptionAlerts;
 
     @ManyToOne
-    @JoinColumn(name = "energy_provider", nullable = true)
+    @JoinColumn(name = "energy_provider_id", nullable = true)
     @JsonBackReference
     private EnergyProvider energyProvider;
 
