@@ -31,7 +31,6 @@ public class ConsumptionTrackService {
         deviceRepository.findAll().forEach(devices::add);
 
         devices.forEach(d -> consumptionRepository.save(new Consumption(d.getConsumptionKWh(), d)));
-        System.out.println("foi");
     }
 
     public TrackResponse getCurrentConsumptionOfAddress(Long addressId){

@@ -8,10 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class AddressRequestToEntity {
-
-    private EnergyProviderService energyProviderService;
     public Address mapper (AddressRequest addressRequest){
         var address = new Address();
         BeanUtils.copyProperties(addressRequest, address);
