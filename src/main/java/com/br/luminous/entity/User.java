@@ -25,10 +25,15 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private LocalDate birthdate;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Column(name = "addresses")
     @JsonManagedReference
     private List<Address> addresses;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @Column(name = "tokens")
+    @JsonManagedReference
+    private List<Token> tokens;
+
     @ManyToMany()
     @JoinTable(name="users_read_weather_tip", joinColumns = {@JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="id")})
     private List<WeatherTip> weatherTips;

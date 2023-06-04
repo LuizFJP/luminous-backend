@@ -494,8 +494,6 @@ INSERT INTO address (id, city, cep, street, neighborhood, house_number, input_vo
 --            (20, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 234, 110, 10),
 --            (30, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 345, 220, 10);
 
-insert INTO users_addresses (user_user_id, addresses_id) VALUES(10,10);
-
 INSERT INTO device (id, name, power, usage_time, address_id)
     VALUES (10, 'Geladeira', 220, '23:59', 10),
            (11, 'Computador', 1200, '06:00', 10),
