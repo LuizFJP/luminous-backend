@@ -14,9 +14,7 @@ public class AddressRequestToEntity {
     private EnergyProviderService energyProviderService;
     public Address mapper (AddressRequest addressRequest){
         var address = new Address();
-
         BeanUtils.copyProperties(addressRequest, address);
-        address.setEnergyProvider(energyProviderService.getEnergyProviderById(addressRequest.getEnergyProviderId()));
         return address;
     }
 }
