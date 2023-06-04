@@ -35,17 +35,16 @@ public class ConsumptionTrackService {
     }
 
     public TrackResponse getCurrentConsumptionOfAddress(Long addressId){
-            double consKWh;
-            double consReais;
+            Double consKWh;
+            Double consReais;
 
-        try {
             consKWh = consumptionRepository.getCurrentConsumption(addressId).get(0).getEnergyConsumptionKWh();
             consReais = consumptionRepository.getCurrentConsumption(addressId).get(0).getEnergyConsumptionReais();
-        }
-        catch (NullPointerException e){
-            consKWh = 0.0;
-            consReais = 0.0;
-        }
+
+            if(consKWh == null || consReais == null) {
+                consKWh = 0.0;
+                consReais = 0.0;
+            }
 
         for (Device d :deviceService.findDevicesByAddressId(addressId)) {
             consKWh += d.getConsumptionKWh();
