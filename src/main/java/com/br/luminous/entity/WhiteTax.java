@@ -37,7 +37,7 @@ public class WhiteTax  implements Serializable {
     private LocalTime startHourHighPrice;
     @Column(name = "end_hour_high_price")
     private LocalTime endHourHighPrice;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "energy_provider_id")
     private EnergyProvider energyProvider;
 

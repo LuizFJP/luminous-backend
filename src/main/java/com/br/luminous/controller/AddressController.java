@@ -3,7 +3,6 @@ package com.br.luminous.controller;
 import com.br.luminous.entity.Address;
 import com.br.luminous.models.AddressRequest;
 import com.br.luminous.models.AddressResponse;
-import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.service.AddressService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

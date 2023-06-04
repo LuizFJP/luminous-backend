@@ -1,5 +1,7 @@
 package com.br.luminous.service;
 
+import com.br.luminous.entity.EnergyBill;
+import com.br.luminous.entity.EnergyProvider;
 import com.br.luminous.exceptions.UserNotFoundException;
 import com.br.luminous.models.AddressRequest;
 import com.br.luminous.models.AddressResponse;
@@ -8,6 +10,8 @@ import com.br.luminous.entity.User;
 import com.br.luminous.exceptions.AddressNotFoundException;
 import com.br.luminous.mapper.AddressRequestToEntity;
 import com.br.luminous.repository.AddressRepository;
+import com.br.luminous.repository.EnergyBillRepository;
+import com.br.luminous.repository.EnergyProviderRepository;
 import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -24,11 +28,15 @@ public class AddressService {
     private AddressRequestToEntity addressRequestToEntity;
     private UserRepository userRepository;
     private UserService userService;
+    private EnergyProviderRepository energyProviderRepository;
 
     public Long create(Long userId, AddressRequest addressRequest){
         var address = addressRequestToEntity.mapper(addressRequest);
         var user = updateUserAddresses(userId, address);
+        EnergyProvider energyProvider= energyProviderRepository.getById(addressRequest.getEnergyProviderId());
         address.setUser(user);
+        address.setEnergyProvider(energyProvider);
+
         var savedAddress = addressRepository.save(address);
         userRepository.save(user);
         return savedAddress.getId();
