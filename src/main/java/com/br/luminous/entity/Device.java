@@ -26,4 +26,12 @@ public class Device {
     @JoinColumn(name = "address_id", nullable = false)
     @JsonBackReference
     private Address address;
+
+    public double getConsumptionKWh(){
+        return usageTime.getHour() + ((usageTime.getMinute())/0.6)/100;
+    }
+
+    public double getConsumptionReais(){
+        return getConsumptionKWh() * address.getEnergyProvider().getWhiteTax().getRegularPrice();
+    }
 }
