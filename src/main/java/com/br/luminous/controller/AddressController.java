@@ -43,4 +43,9 @@ public class AddressController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping("/user/{userId}/main")
+    public Address getMainAddress(@PathVariable Long userId){
+        return addressService.getMainAddress(userId);
+    }
+
 }
