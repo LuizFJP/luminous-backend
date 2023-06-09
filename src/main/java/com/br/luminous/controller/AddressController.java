@@ -3,7 +3,6 @@ package com.br.luminous.controller;
 import com.br.luminous.entity.Address;
 import com.br.luminous.models.AddressRequest;
 import com.br.luminous.models.AddressResponse;
-import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.service.AddressService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,6 +40,11 @@ public class AddressController {
     public ResponseEntity<AddressResponse> deleteAddressesOfUser(@PathVariable Long userId, @PathVariable Long id) {
         addressService.delete(userId, id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{userId}/main")
+    public Address getMainAddress(@PathVariable Long userId){
+        return addressService.getMainAddress(userId);
     }
 
 }

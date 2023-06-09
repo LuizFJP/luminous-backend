@@ -1,7 +1,6 @@
 package com.br.luminous.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -23,9 +22,11 @@ public class Address {
     private int houseNumber;
     private int inputVoltage;
     private String street;
-    private String state;
     private String neighborhood;
-
+    private String state;
+    private String nickname;
+    @Column(name = "main_address", nullable = false)
+    private boolean mainAddress;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
     @JsonManagedReference
@@ -46,7 +47,7 @@ public class Address {
     private List<ConsumptionAlert> consumptionAlerts;
 
     @ManyToOne
-    @JoinColumn(name = "energy_provider", nullable = true)
+    @JoinColumn(name = "energy_provider_id", nullable = true)
     @JsonBackReference
     private EnergyProvider energyProvider;
 

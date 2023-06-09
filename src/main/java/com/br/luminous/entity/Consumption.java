@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -16,6 +18,7 @@ public class Consumption {
     private long id;
     private double energyConsumptionKWh;
     private double energyConsumptionReais;
+    private LocalDate period;
 
     @ManyToOne
     @JoinColumn(name = "device_id", nullable = false)
@@ -26,6 +29,7 @@ public class Consumption {
         this.energyConsumptionKWh = energyConsumptionKWh;
         this.device = device;
         this.energyConsumptionReais = energyConsumptionKWh * getTaxes();
+        this.period = LocalDate.now();
     }
 
     private double getTaxes(){

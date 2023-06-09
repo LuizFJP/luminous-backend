@@ -23,8 +23,7 @@ public class EnergyProvider {
     @Column(name = "url_energy_fall")
     private String urlEnergyFall;
 
-    @OneToOne
-    @JoinColumn(name = "white_tax_id")
+    @OneToOne(mappedBy = "energyProvider")
     private WhiteTax whiteTax;
     @OneToMany(cascade = CascadeType.ALL)
     @Column(name = "addresses")
