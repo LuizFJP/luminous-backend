@@ -11,5 +11,6 @@ public class Tip {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String message;
+    @Column(columnDefinition = "text")
+    private String tipMessage;
 }

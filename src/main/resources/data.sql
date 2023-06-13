@@ -503,6 +503,40 @@ INSERT INTO tariff_flag (month, flag_type)
           ('2023-03-01', 1),
           ('2023-04-01', 2);
 
+INSERT INTO tip (id, tip_message)
+    VALUES (1, 'Utilize lâmpadas de LED: As lâmpadas de LED consomem significativamente menos energia em comparação com as lâmpadas tradicionais incandescentes e fluorescentes compactas, além de terem uma vida útil mais longa.'),
+            (2, 'Desligue os aparelhos eletrônicos quando não estiverem em uso: Mesmo em modo de espera, muitos aparelhos continuam consumindo energia. Desligue-os completamente quando não estiverem sendo utilizados.'),
+            (3, 'Utilize a luz natural sempre que possível: Aproveite a luz natural do sol abrindo cortinas e persianas durante o dia. Isso reduzirá a necessidade de acender luzes elétricas.'),
+            (4, 'Utilize aparelhos energicamente eficientes: Ao comprar novos eletrodomésticos ou eletrônicos, verifique se possuem a classificação energética mais alta possível. Os aparelhos com classificação A ou A+ são mais eficientes.'),
+            (5, 'Evite o uso excessivo do ar-condicionado: Em vez de definir temperaturas muito baixas, utilize o ar-condicionado com moderação e ajuste a temperatura para um nível confortável.'),
+            (6, 'Descongele regularmente a geladeira: O acúmulo de gelo na geladeira e no freezer aumenta o consumo de energia. Descongele-os regularmente para garantir um funcionamento eficiente.'),
+            (7, 'Utilize a função de suspensão do computador: Configure o seu computador para entrar em modo de suspensão ou hibernação quando não estiver em uso por um período prolongado. Isso reduzirá o consumo de energia.'),
+            (8, 'Aproveite a luz natural para secar roupas: Em vez de utilizar a secadora de roupas, aproveite a luz solar para secar roupas ao ar livre. Além de economizar energia, essa prática também é mais gentil com as roupas.'),
+            (9, 'Instale dispositivos de economia de energia: Utilize dispositivos como temporizadores, sensores de movimento e termostatos programáveis para controlar o uso de energia em sua casa.'),
+            (10, 'Desligue os carregadores de dispositivos quando não estiverem em uso: Mesmo quando não estão carregando um dispositivo, os carregadores continuam consumindo energia. Desligue-os da tomada quando não estiverem em uso.'),
+            (11, 'Instale painéis solares: A energia solar é uma fonte renovável e limpa de energia. Ao instalar painéis solares em sua casa, você pode gerar sua própria eletricidade e reduzir a dependência da rede elétrica tradicional.'),
+            (12, 'Utilize aquecedores solares de água: Aquecedores solares de água utilizam a energia solar para aquecer a água utilizada em chuveiros, torneiras e outros pontos de consumo. Isso reduz o uso de energia elétrica ou gás para aquecimento de água.'),
+            (13, 'Aproveite a energia eólica: Se você mora em uma área propícia, considere instalar uma turbina eólica residencial. A energia gerada pelo vento pode ser usada para abastecer sua casa, reduzindo assim o consumo de energia convencional.'),
+            (14, 'Utilize iluminação solar exterior: Utilize luminárias solares para iluminar áreas externas, como jardins e pátios. Essas luminárias carregam durante o dia e acendem automaticamente à noite, aproveitando a energia solar gratuita.'),
+            (15, 'Invista em sistemas de armazenamento de energia: Ao combinar painéis solares com sistemas de armazenamento de energia, como baterias, você pode armazenar o excesso de energia gerada durante o dia para uso durante a noite ou em períodos nublados.'),
+            (16, 'Utilize sistemas de aquecimento e resfriamento geotérmico: Sistemas geotérmicos aproveitam o calor natural do subsolo para aquecer e resfriar ambientes. Essa tecnologia utiliza bombas de calor geotérmicas para uma eficiência energética superior.'),
+            (17, 'Utilize energia hidrelétrica: Se você possui um rio ou córrego em sua propriedade, pode considerar a instalação de um sistema de microgeração hidrelétrica para gerar eletricidade a partir do fluxo de água.'),
+            (18, 'Promova o uso de transportes sustentáveis: Utilize bicicletas, caminhe ou utilize veículos elétricos para se deslocar sempre que possível. Essas opções de transporte têm menor impacto ambiental e contribuem para a redução das emissões de gases de efeito estufa.'),
+            (19, 'Utilize sistemas de aquecimento passivo: Projete sua casa de forma a aproveitar a luz solar e o calor natural para aquecer os ambientes durante o inverno, reduzindo assim a necessidade de aquecimento artificial.'),
+            (20, 'Participe de programas de compensação de carbono: Contribua para projetos de energia renovável através de programas de compensação de carbono. Esses programas financiam a implantação de projetos renováveis para compensar as emissões de carbono associadas ao seu consumo de energia.'),
+           (21, 'Utilize energia maremotriz: Se você vive próximo ao oceano, considere aproveitar a energia das marés para gerar eletricidade. A energia maremotriz é uma forma limpa e renovável de energia.'),
+           (22, 'Utilize energia de biomassa: Aproveite resíduos orgânicos, como restos de alimentos e de culturas agrícolas, para gerar energia por meio de processos de biomassa. Essa é uma fonte renovável e sustentável de energia.'),
+           (23, 'Participe de cooperativas de energia renovável: Junte-se a cooperativas de energia renovável locais, onde você pode investir e compartilhar os benefícios da geração de energia limpa e renovável.'),
+           (24, 'Utilize sistemas de aquecimento solar: Instale sistemas de aquecimento solar de água para aquecer a água utilizada em chuveiros, torneiras e piscinas. A energia solar térmica é uma opção eficiente e econômica.'),
+           (25, 'Utilize turbinas de vento residenciais: Se você mora em uma área com ventos consistentes, considere instalar turbinas de vento residenciais para gerar eletricidade para uso doméstico.'),
+           (26, 'Utilize sistemas de cogeração: Os sistemas de cogeração, também conhecidos como CHP (Combined Heat and Power), permitem a geração simultânea de eletricidade e calor a partir de uma única fonte de energia, resultando em maior eficiência energética.'),
+           (27, 'Participe de programas de incentivo à energia solar: Verifique se há programas governamentais ou estaduais que ofereçam incentivos financeiros ou subsídios para a instalação de sistemas de energia solar em residências e empresas.'),
+           (28, 'Utilize telhados verdes: Telhados verdes, cobertos com vegetação, proporcionam isolamento térmico, reduzindo a necessidade de aquecimento e resfriamento artificial, e contribuem para a melhoria da qualidade do ar.'),
+           (29, 'Utilize janelas de alta eficiência energética: Opte por janelas com vidros de alta eficiência energética, que reduzem a transferência de calor para dentro ou para fora da casa, proporcionando melhor isolamento térmico.'),
+           (30, 'Utilize sistemas de armazenamento de água da chuva: Instale sistemas de captação e armazenamento de água da chuva para uso em atividades que não exigem água potável, como irrigação de jardins e descargas de banheiros.');
+
+
+
 
 INSERT INTO Consumption (id, energy_consumptionkwh, energy_consumption_reais, period, device_id)
 VALUES (1001, 5.2763, 2.6381, '2023-03-31', 10),

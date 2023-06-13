@@ -2,12 +2,15 @@ package com.br.luminous.controller;
 
 import com.br.luminous.entity.Tip;
 import com.br.luminous.exceptions.TipNotFoundException;
+import com.br.luminous.models.TipRequest;
 import com.br.luminous.service.TipService;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -27,9 +30,9 @@ import org.springframework.web.bind.annotation.*;
         return new ResponseEntity<Tip>(tip, HttpStatus.OK);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Tip> update(@PathVariable Long id, @RequestBody String message){
-        Tip tip = tipService.update(id, message);
-        return new ResponseEntity<>(tip, HttpStatus.OK);
+    public ResponseEntity<Tip> update(@PathVariable Long id, @RequestBody TipRequest tipRequest){
+        var tip = tipService.update(id, tipRequest);
+        return new ResponseEntity<Tip>(tip, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Tip> delete(@PathVariable Long id){
@@ -39,6 +42,10 @@ import org.springframework.web.bind.annotation.*;
         }catch(TipNotFoundException exception){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
+    }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Tip>> getAll(){
+        List<Tip> TipList = tipService.getAll();
+        return ResponseEntity.ok(TipList);
     }
 }
