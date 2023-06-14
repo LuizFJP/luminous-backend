@@ -27,6 +27,7 @@ public class TipService {
     public Tip update(Long id, TipRequest tipRequest){
         var tipToUpdate = tipRepository.findById(id).get();
         tipToUpdate.setTipMessage(tipRequest.getTipMessage());
+        tipToUpdate.setTipTitle(tipRequest.getTipTitle());
         var updatedTip = tipRepository.save(tipToUpdate);
         return updatedTip;
     }

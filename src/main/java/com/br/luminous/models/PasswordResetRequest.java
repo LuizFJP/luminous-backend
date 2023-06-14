@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TipRequest {
-    private String tipMessage;
-    private String tipTitle;
+public class PasswordResetRequest {
+    private String email;
+    private String password;
+
 }

@@ -1,16 +1,11 @@
 package com.br.luminous.controller;
 
-import com.br.luminous.models.AuthenticationRequest;
-import com.br.luminous.models.AuthenticationResponse;
-import com.br.luminous.models.UserRequest;
+import com.br.luminous.models.*;
 import com.br.luminous.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -31,5 +26,14 @@ public class AuthenticationController {
         var jwtToken = service.authenticate(request);
         return new ResponseEntity<AuthenticationResponse>(jwtToken, HttpStatus.OK);
     }
-
+    @PostMapping("/password-recovery")
+    public ResponseEntity<String> passwordRecovery(@RequestBody PasswordRecoveryRequest passwordRecoveryRequest){
+        service.initiatePasswordRecovery(passwordRecoveryRequest.getEmail());
+        return ResponseEntity.ok("Email de recuperação de senha enviado com sucesso");
+    }
+    @PostMapping("/password-reset")
+    public ResponseEntity<String> passwordReset(@RequestParam(name = "token") String token, @RequestBody PasswordResetRequest passwordResetRequest){
+        service.resetPassword(token, passwordResetRequest.getPassword(), passwordResetRequest.getEmail());
+        return ResponseEntity.ok("Senha redefinida com sucesso.");
+    }
 }

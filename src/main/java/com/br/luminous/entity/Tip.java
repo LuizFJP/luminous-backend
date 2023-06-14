@@ -12,5 +12,8 @@ public class Tip {
     private Long id;
 
     @Column(columnDefinition = "text")
+    private String tipTitle;
+    @Column(columnDefinition = "text")
     private String tipMessage;
+
 }
