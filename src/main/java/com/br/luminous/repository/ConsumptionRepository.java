@@ -19,4 +19,15 @@ public interface ConsumptionRepository extends JpaRepository<Consumption, Long> 
                     "WHERE consumption.period >= (select * from vw_last_restart_day);")
     List<TrackProjection> getCurrentConsumption(Long addressId);
 
+
+    @Query(nativeQuery = true, value =
+            "select " +
+                    "name name, SUM(energy_consumptionKWh) energyConsumptionKWh," +
+                    " SUM(energy_consumption_reais) energyConsumptionReais, DATE_TRUNC('month', period) period" +
+            " FROM device " +
+            " INNER JOIN consumption " +
+            " ON consumption.device_id = device.id" +
+            " GROUP BY device.name, period" +
+            " ORDER BY period, energyConsumptionReais DESC, energyConsumptionKWh DESC")
+    List<ReportProjection> getReport(Long addressId);
 }
