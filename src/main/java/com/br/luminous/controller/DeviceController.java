@@ -30,13 +30,13 @@ public class DeviceController {
     }
 
     @PutMapping(value = "{id}/address/{addressId}")
-    public ResponseEntity<DeviceResponse> update(@PathVariable Long id, @RequestBody DeviceRequest device, @PathVariable Long addressId){
+    public ResponseEntity<DeviceResponse> updateDevice(@PathVariable Long id, @RequestBody DeviceRequest device, @PathVariable Long addressId){
         deviceService.update(id, device, addressId);
         return new ResponseEntity(device, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "{id}/address/{addressId}")
-    public ResponseEntity<DeviceResponse> delete(@PathVariable Long id, @PathVariable String addressId)  {
+    public ResponseEntity<DeviceResponse> deleteDevice(@PathVariable Long id, @PathVariable String addressId)  {
         deviceService.delete(id);
         return new ResponseEntity (HttpStatus.OK);
     }
