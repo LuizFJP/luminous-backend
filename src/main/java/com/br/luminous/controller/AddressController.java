@@ -47,4 +47,10 @@ public class AddressController {
         return addressService.getMainAddress(userId);
     }
 
+    @GetMapping("/{addressId}")
+    public ResponseEntity<Address> getAddress(@PathVariable Long addressId){
+        var RequestedAddress = addressService.getAddressById(addressId);
+        return new ResponseEntity<>(RequestedAddress, HttpStatus.OK);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.br.luminous.service;
 
+import com.br.luminous.exceptions.UserNotFoundException;
 import com.br.luminous.models.AuthenticationRequest;
 import com.br.luminous.models.AuthenticationResponse;
 import com.br.luminous.models.UserRequest;
@@ -9,6 +10,7 @@ import com.br.luminous.enums.TokenType;
 import com.br.luminous.exceptions.EmailAlreadyExistsException;
 import com.br.luminous.repository.TokenRepository;
 import com.br.luminous.repository.UserRepository;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +28,8 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final UserService userService;
+
+    private final EmailService emailService;
 
 
     public Long register(UserRequest userRequest) {
@@ -82,5 +86,38 @@ public class AuthenticationService {
             token.setRevoked(true);
         });
         tokenRepository.saveAll(validUserTokens);
+    }
+
+    public void initiatePasswordRecovery(String email){
+        var user = userService.findByEmail(email);
+        if(user == null) {
+            throw new UserNotFoundException();
+        }
+        String token = jwtService.generateToken(user, user.getId());
+        String recoveryUrl = "http://localhost:3000/password/reset" + "?token=" + token;
+        String subject = "Recuperação de senha";
+        String message = "Olá" + user.getName() + ",\n\n" +
+        "Você solicitou a recuperação de senha. Para criar uma nova senha clique no link abaixo: \n"
+                + recoveryUrl + "\n\n" +
+                "Caso você não tenha solicitado a recuperação de senha, ignore este e-mail \n\n"
+                + "Atenciosamente, \n" +
+                "Equipe Luminous";
+        emailService.sendEmail(user.getEmail(), subject, message);
+    }
+
+    public void resetPassword(String token, String newPassword, String userEmail){
+        var user = userService.findByEmail(userEmail);
+        var passwordResetToken = jwtService.isTokenValid(token, user);
+        if(passwordResetToken){
+            userService.resetUserPassword(user, newPassword);
+            String subject = "Senha Redefinida";
+            String message = "Olá " + user.getName() + ", \n\n" +
+                    "Sua senha foi redefinida com sucesso. \n\n" +
+                    "Atenciosamente, \n" +
+                    "Equipe Luminous";
+            emailService.sendEmail(user.getEmail(), subject, message);
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 }

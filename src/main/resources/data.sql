@@ -503,6 +503,51 @@ INSERT INTO tariff_flag (month, flag_type)
           ('2023-03-01', 1),
           ('2023-04-01', 2);
 
+INSERT INTO tip (id, tip_title, tip_message)
+VALUES
+    (1, 'Utilize lâmpadas de baixo consumo', 'Substitua lâmpadas incandescentes por lâmpadas de LED, que consomem menos energia e possuem maior durabilidade.'),
+    (2, 'Desligue aparelhos eletrônicos em standby', 'Mesmo em standby, os aparelhos consomem energia. Desligue completamente quando não estiverem em uso.'),
+    (3, 'Aproveite a luz natural', 'Abra cortinas e aproveite a luz natural durante o dia, reduzindo a necessidade de iluminação artificial.'),
+    (4, 'Utilize a função de suspensão do computador', 'Ao não utilizar o computador, coloque-o em modo de suspensão para economizar energia.'),
+    (5, 'Não deixe eletrônicos em modo de espera', 'Desligue completamente os aparelhos eletrônicos quando não estiverem sendo utilizados.'),
+    (6, 'Utilize a máquina de lavar com carga completa', 'Evite lavar roupas com poucas peças. Espere até ter uma carga completa para utilizar a máquina de lavar.'),
+    (7, 'Desligue as luzes ao sair de um cômodo', 'Lembre-se de desligar as luzes sempre que sair de um ambiente para economizar energia.'),
+    (8, 'Utilize a função de economia de energia do ar-condicionado', 'Configure o ar-condicionado para a função de economia de energia e ajuste a temperatura para um nível confortável.'),
+    (9, 'Evite abrir a porta da geladeira desnecessariamente', 'Ao abrir a porta da geladeira, o ar frio escapa e faz com que o aparelho precise trabalhar mais para resfriar novamente.'),
+    (10, 'Desligue o carregador do celular após a carga completa', 'Retire o carregador da tomada após o celular estar completamente carregado para evitar desperdício de energia. '),
+    (11, 'Utilize cortinas ou persianas para isolar o calor', 'Durante o verão, mantenha as cortinas ou persianas fechadas nos horários mais quentes para reduzir a entrada de calor.'),
+    (12, 'Evite o uso excessivo do aquecedor', 'Use roupas adequadas e mantenha-se aquecido com cobertores antes de recorrer ao aquecedor, evitando assim o consumo excessivo de energia.'),
+    (13, 'Descongele regularmente o freezer', 'O acúmulo de gelo no freezer reduz sua eficiência energética. Descongele-o regularmente para evitar o desperdício de energia.'),
+    (14, 'Utilize a função de autodesligamento da TV', 'Configure a TV para desligar automaticamente após um período de inatividade, evitando assim o consumo de energia desnecessário.'),
+    (15, 'Limpe regularmente as lâmpadas e luminárias', 'Lâmpadas e luminárias sujas reduzem a eficiência da iluminação, exigindo mais energia para iluminar adequadamente o ambiente. Mantenha-os limpos regularmente.'),
+    (16, 'Aproveite a luz natural para secar roupas', 'Em dias ensolarados, opte por secar roupas ao ar livre em vez de usar a secadora, aproveitando a energia gratuita do sol.'),
+    (17, 'Utilize ar-condicionado com a temperatura adequada', 'Evite ajustar o ar-condicionado para temperaturas muito baixas ou muito altas. Defina a temperatura para um nível confortável e economize energia.'),
+    (18, 'Desligue o computador quando não estiver em uso', 'Ao deixar o computador por um período prolongado, desligue-o completamente para economizar energia.'),
+    (19, 'Utilize a função de economia de água da máquina de lavar', 'Configure a máquina de lavar para utilizar a quantidade adequada de água de acordo com a carga de roupas, economizando energia e recursos hídricos.'),
+    (20, 'Realize manutenção regular em equipamentos elétricos', 'Equipamentos elétricos bem conservados e com manutenção adequada tendem a ser mais eficientes em termos de consumo de energia.'),
+    (21, 'Invista em sistemas de energia solar', 'Considere a instalação de painéis solares em sua residência. Essa é uma opção sustentável que pode reduzir significativamente o consumo de energia elétrica.'),
+    (22, 'Utilize eletrodomésticos de alta eficiência energética', 'Ao adquirir novos eletrodomésticos, verifique a classificação de eficiência energética e escolha os modelos mais eficientes, que consomem menos energia.'),
+    (23, 'Automatize o sistema de iluminação', 'Utilize sistemas de automação residencial para controlar as luzes. Dessa forma, você poderá programar horários de ligar e desligar, evitando o desperdício de energia.'),
+    (24, 'Instale janelas com vidros duplos', 'As janelas com vidros duplos proporcionam um melhor isolamento térmico e acústico, reduzindo a necessidade de aquecimento ou refrigeração, o que resulta em economia de energia.'),
+    (25, 'Utilize sistemas de aquecimento solar de água', 'Ao invés de utilizar aquecedores elétricos, opte por sistemas de aquecimento solar de água. Eles aproveitam a energia solar para aquecer a água, reduzindo o consumo de energia elétrica.'),
+    (26, 'Faça uso de lâmpadas LED de alta eficiência', 'Substitua as lâmpadas convencionais por lâmpadas de LED de alta eficiência energética. Elas consomem menos energia e possuem maior durabilidade.'),
+    (27, 'Instale sensores de movimento para iluminação', 'Utilize sensores de movimento para acionar a iluminação em áreas de baixo tráfego, garantindo que as luzes sejam ativadas somente quando necessário.'),
+    (28, 'Realize isolamento térmico nas paredes e no telhado', 'Invista em isolamento térmico de alta qualidade nas paredes e no telhado de sua residência. Isso ajudará a manter a temperatura interna estável, reduzindo a necessidade de aquecimento ou refrigeração.'),
+    (29, 'Utilize sistemas de ventilação eficientes', 'Instale sistemas de ventilação eficientes, como ventiladores de teto ou sistemas de ventilação mecânica controlada. Eles promovem a circulação de ar e reduzem a necessidade de refrigeração.'),
+    (30, 'Utilize cortinas ou persianas com isolamento térmico', 'Invista em cortinas ou persianas com isolamento térmico para reduzir a transferência de calor pela janela, mantendo a temperatura interna mais agradável.'),
+    (31, 'Utilize sistemas de climatização com controle de temperatura', 'Opte por sistemas de climatização que permitam o controle individual da temperatura em cada ambiente da casa, evitando o desperdício de energia.'),
+    (32, 'Instale painéis solares fotovoltaicos', 'Além dos painéis solares para aquecimento de água, considere também a instalação de painéis solares fotovoltaicos para geração de energia elétrica. Isso permitirá reduzir a dependência da rede elétrica.'),
+    (33, 'Adote o uso de sistemas de armazenamento de energia', 'Complemente seu sistema de painéis solares com sistemas de armazenamento de energia, como baterias. Isso possibilita o armazenamento da energia produzida durante o dia para uso durante a noite, reduzindo a necessidade de consumo da rede elétrica.'),
+    (34, 'Utilize sistemas de automação residencial avançados', 'Invista em sistemas de automação residencial mais avançados, que permitem o monitoramento e controle detalhado do consumo de energia em cada dispositivo e a otimização do uso de energia.'),
+    (35, 'Faça o uso de eletrodomésticos inteligentes', 'Opte por eletrodomésticos inteligentes que possuem recursos de otimização de energia, como a programação para operar em horários de menor demanda.'),
+    (36, 'Instale sistemas de aquecimento geotérmico', 'Os sistemas de aquecimento geotérmico utilizam a energia térmica do subsolo para aquecer ou refrigerar sua residência. Essa opção é altamente eficiente e sustentável.'),
+    (37, 'Realize o monitoramento do consumo de energia em tempo real', 'Instale dispositivos de monitoramento de energia que forneçam informações em tempo real sobre o consumo de energia da sua casa, permitindo ajustes e identificação de desperdícios.'),
+    (38, 'Utilize painéis de vidro isolante nas janelas', 'Painéis de vidro isolante ajudam a reduzir a perda de calor no inverno e o ganho de calor no verão, mantendo a temperatura interna mais estável e reduzindo a necessidade de aquecimento e refrigeração.'),
+    (39, 'Faça uso de sistemas de irrigação eficientes', 'Se você possui um jardim, utilize sistemas de irrigação eficientes, como gotejamento ou aspersão de baixo volume, para evitar o desperdício de água e energia.'),
+    (40, 'Invista em isolamento acústico nas paredes e no telhado', 'Além do isolamento térmico, o isolamento acústico também é importante. Invista em materiais que ajudem a reduzir a entrada de ruídos externos, proporcionando maior conforto e qualidade de vida.');
+
+
+
 
 INSERT INTO Consumption (id, energy_consumptionkwh, energy_consumption_reais, period, device_id)
 VALUES (1001, 5.2763, 2.6381, '2023-03-31', 10),
