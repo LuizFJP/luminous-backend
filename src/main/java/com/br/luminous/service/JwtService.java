@@ -1,10 +1,14 @@
 package com.br.luminous.service;
 
+import com.br.luminous.entity.Token;
+import com.br.luminous.repository.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,6 +58,7 @@ public class JwtService {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
+
 
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
