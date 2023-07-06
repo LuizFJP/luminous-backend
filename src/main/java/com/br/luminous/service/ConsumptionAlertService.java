@@ -40,7 +40,7 @@ public class ConsumptionAlertService {
         try {
             var consumptionAlertToUpdate = consumptionAlertRepository.findById(id).get();
             consumptionAlertToUpdate.setConsumptionLimit(consumptionAlertRequest.getConsumptionLimit());
-            consumptionAlertToUpdate.setDescricao(consumptionAlertRequest.getDescription());
+            consumptionAlertToUpdate.setDescricao(consumptionAlertRequest.getDescricao());
             var response = consumptionAlertRepository.save(consumptionAlertToUpdate);
             return response;
         }catch(ConsumptionAlertNotFound e){

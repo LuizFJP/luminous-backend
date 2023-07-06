@@ -1,5 +1,6 @@
 package com.br.luminous.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -24,8 +25,10 @@ public class EnergyProvider {
     private String urlEnergyFall;
 
     @OneToOne(mappedBy = "energyProvider")
+    @JsonBackReference
     private WhiteTax whiteTax;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "energyProvider")
     @Column(name = "addresses")
     @JsonManagedReference
     private List<Address> addresses;

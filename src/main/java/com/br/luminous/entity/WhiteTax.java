@@ -1,5 +1,6 @@
 package com.br.luminous.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -39,6 +40,7 @@ public class WhiteTax  implements Serializable {
     private LocalTime endHourHighPrice;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "energy_provider_id")
+    @JsonBackReference
     private EnergyProvider energyProvider;
 
 }
