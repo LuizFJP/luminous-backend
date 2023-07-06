@@ -26,7 +26,6 @@ public class AuthenticationController {
         var jwtToken = service.authenticate(request);
         return new ResponseEntity<AuthenticationResponse>(jwtToken, HttpStatus.OK);
     }
-
     @PostMapping("/password-recovery")
     public ResponseEntity<String> passwordRecovery(@RequestBody PasswordRecoveryRequest passwordRecoveryRequest){
         service.initiatePasswordRecovery(passwordRecoveryRequest.getEmail());
