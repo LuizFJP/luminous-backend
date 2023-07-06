@@ -28,9 +28,9 @@ public class EnergyProvider {
     @JsonBackReference
     private WhiteTax whiteTax;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "energyProvider")
-    @Column(name = "addresses")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "energyProvider")
+    //@Column(name = "addresses")
+    @JsonBackReference
     private List<Address> addresses;
 
 }

@@ -48,7 +48,7 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "energy_provider_id", nullable = true)
-    @JsonBackReference
+    @JsonManagedReference
     private EnergyProvider energyProvider;
 
 }

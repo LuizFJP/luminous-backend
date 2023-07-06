@@ -58,7 +58,7 @@ INSERT INTO energy_provider(energy_provider_id, company_name, url_maintenance, u
                            (6,'CEEE Equatorial','',''),
                            (7,'Cegero','',''),
                            (8,'Cejama','',''),
-                           (9,'Celesc-DIS','',''),
+                           (9,'Celesc-DIS','https://www.celesc.com.br/avisos-de-desligamentos','https://celgeoweb.celesc.com.br/desktop.html'),
                            (10,'CELETRO','',''),
                            (11,'Cemig-D','',''),
                            (12,'Cemirim','',''),
@@ -489,7 +489,7 @@ INSERT INTO users (user_id, name, phone, user_name, email, password, birthdate)
 
 
 INSERT INTO address (id, main_address, state, city, cep, street, neighborhood, house_number, input_voltage, user_id, energy_provider_id)
-    VALUES (10, true, 'SP','São Paulo', '00000-000', 'Avenida Paulista', 'cachoeirinha do grau' , 123, 110, 10, 76);
+    VALUES (10, true, 'SP','São Paulo', '00000-000', 'Avenida Paulista', 'cachoeirinha do grau' , 123, 110, 10, 9);
 --            (20, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 234, 110, 10),
 --            (30, 'São Paulo', '00000-000', 'cachoeirinha do grau', 'Avenida Paulista', 345, 220, 10);
 
