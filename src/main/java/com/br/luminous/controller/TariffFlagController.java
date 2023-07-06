@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/tariffFlag")
+@RequestMapping("api/tariffFlag")   
 public class TariffFlagController {
 
     private TariffFlagService tariffFlagService;
