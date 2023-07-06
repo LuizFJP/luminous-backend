@@ -28,7 +28,7 @@ public class Device {
     private Address address;
 
     public double getConsumptionKWh(){
-        return usageTime.getHour() + ((usageTime.getMinute())/0.6)/100;
+        return power * (usageTime.getHour() + ((usageTime.getMinute())/0.6)/100)/1000;
     }
 
     public double getConsumptionReais(){
