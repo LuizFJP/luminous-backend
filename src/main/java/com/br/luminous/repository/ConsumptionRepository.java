@@ -27,6 +27,8 @@ public interface ConsumptionRepository extends JpaRepository<Consumption, Long> 
             " SUM(energy_consumption_reais) energyConsumptionReais"+
             " FROM device"+
             " INNER JOIN consumption ON consumption.device_id = device.id"+
+                    " inner join address " +
+                    "on (:addressId) = device.address_id " +
             " GROUP BY name, DATE_TRUNC('month', period)"+
             " ORDER BY DATE_TRUNC('month', period)"
     )
