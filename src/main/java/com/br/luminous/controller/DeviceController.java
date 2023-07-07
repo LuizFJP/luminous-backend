@@ -1,30 +1,43 @@
 package com.br.luminous.controller;
-import com.br.luminous.DTO.UserRequest;
-import com.br.luminous.DTO.UserResponse;
 import com.br.luminous.entity.Device;
+import com.br.luminous.models.DeviceRequest;
+import com.br.luminous.models.DeviceResponse;
 import com.br.luminous.service.DeviceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/user/devices")
+@RequestMapping("api/device")
 public class DeviceController {
 
     private DeviceService deviceService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<String> teste() {
-        return new ResponseEntity<String>
-        ("Deu certo! \nAqui é a tela de dispositivos",
-        HttpStatus.CREATED);
+    @GetMapping("all/address/{addressId}")
+    public ResponseEntity<List<Device>> getDevicesOfAddress(@PathVariable Long addressId) {
+        List<Device> list = deviceService.findDevicesByAddressId(addressId);
+        return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Long> createDevice(@RequestBody Device device){
-        Long id = deviceService.create(device);
-        return new ResponseEntity<Long>(id, HttpStatus.CREATED);
+    @PostMapping("/address/{addressId}")
+    public ResponseEntity<Long> createDevice(@RequestBody DeviceRequest device, @PathVariable Long addressId){
+        Long response = deviceService.create(device, addressId);
+        return new ResponseEntity<Long>(response, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "{id}/address/{addressId}")
+    public ResponseEntity<DeviceResponse> updateDevice(@PathVariable Long id, @RequestBody DeviceRequest device, @PathVariable Long addressId){
+        deviceService.update(id, device, addressId);
+        return new ResponseEntity(device, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "{id}/address/{addressId}")
+    public ResponseEntity<DeviceResponse> deleteDevice(@PathVariable Long id, @PathVariable String addressId)  {
+        deviceService.delete(id);
+        return new ResponseEntity (HttpStatus.OK);
     }
 }

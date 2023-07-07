@@ -1,10 +1,13 @@
 package com.br.luminous.service;
 
-import com.br.luminous.DTO.UserRequest;
-import com.br.luminous.DTO.UserResponse;
+import com.br.luminous.models.UserRequest;
+import com.br.luminous.models.UserResponse;
 import com.br.luminous.entity.User;
 import com.br.luminous.exceptions.EmailAlreadyExistsException;
 import com.br.luminous.exceptions.UserNotFoundException;
+import com.br.luminous.models.UserUpdateRequest;
+import com.br.luminous.models.UserUpdateResponse;
+import com.br.luminous.repository.AddressRepository;
 import com.br.luminous.repository.TokenRepository;
 import com.br.luminous.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -32,15 +35,14 @@ public class UserService {
             throw new UserNotFoundException();
         }
     }
-    public UserResponse update(Long id, UserRequest userRequest) {
+    public UserUpdateResponse update(Long id, UserUpdateRequest userUpdateRequest) {
         try {
             User user = getUserById(id);
-            BeanUtils.copyProperties(userRequest, user);
-            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+            user = updateUser(user, userUpdateRequest);
             userRepository.save(user);
-            var userResponse = new UserResponse();
-            BeanUtils.copyProperties(user, userResponse);
-            return userResponse;
+            var userUpdateResponse = new UserUpdateResponse();
+            BeanUtils.copyProperties(user, userUpdateResponse);
+            return userUpdateResponse;
         } catch (RuntimeException notFoundException) {
             throw new UserNotFoundException();
         }
@@ -65,5 +67,29 @@ public class UserService {
         userRepository.findByEmail(email).ifPresent(a -> {
                 throw new EmailAlreadyExistsException();
         });
+    }
+
+    private User updateUser(User user, UserUpdateRequest userUpdateRequest) {
+        if (userUpdateRequest.getUserName() != null)
+            user.setUserName(userUpdateRequest.getUserName());
+        if (userUpdateRequest.getBirthdate() != null)
+            user.setBirthdate(userUpdateRequest.getBirthdate());
+        if (userUpdateRequest.getPhone() != null)
+            user.setPhone(userUpdateRequest.getPhone());
+        if (userUpdateRequest.getName() != null)
+            user.setName(userUpdateRequest.getName());
+        if (userUpdateRequest.getPassword() != null)
+            user.setPassword(passwordEncoder.encode(userUpdateRequest.getPassword()));
+        return user;
+    }
+
+    public User findByEmail(String email){
+        var user = userRepository.findByEmail(email).get();
+        return user;
+    }
+
+    public void resetUserPassword(User user, String password){
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
     }
 }

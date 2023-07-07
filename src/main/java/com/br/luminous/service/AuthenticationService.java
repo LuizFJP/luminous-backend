@@ -1,14 +1,16 @@
 package com.br.luminous.service;
 
-import com.br.luminous.DTO.AuthenticationRequest;
-import com.br.luminous.DTO.AuthenticationResponse;
-import com.br.luminous.DTO.UserRequest;
+import com.br.luminous.exceptions.UserNotFoundException;
+import com.br.luminous.models.AuthenticationRequest;
+import com.br.luminous.models.AuthenticationResponse;
+import com.br.luminous.models.UserRequest;
 import com.br.luminous.entity.Token;
 import com.br.luminous.entity.User;
 import com.br.luminous.enums.TokenType;
 import com.br.luminous.exceptions.EmailAlreadyExistsException;
 import com.br.luminous.repository.TokenRepository;
 import com.br.luminous.repository.UserRepository;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,21 +29,20 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final UserService userService;
 
+    private final EmailService emailService;
 
-    public AuthenticationResponse register(UserRequest userRequest) {
+
+    public Long register(UserRequest userRequest) {
         try {
             userService.checkEmailAlreadyExists(userRequest.getEmail());
             var user = new User();
             BeanUtils.copyProperties(userRequest, user);
             user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
             User savedUser = userRepository.save(user);
-            var jwtToken = jwtService.generateToken(user, user.getId());
-            saveUserToken(savedUser, jwtToken);
-            return new AuthenticationResponse(jwtToken);
-        } catch(EmailAlreadyExistsException e) {
-            throw e;
+            return savedUser.getId();
+        } catch(EmailAlreadyExistsException emailAlreadyExistsException) {
+            throw emailAlreadyExistsException;
         }
-
 
     }
 
@@ -85,5 +86,38 @@ public class AuthenticationService {
             token.setRevoked(true);
         });
         tokenRepository.saveAll(validUserTokens);
+    }
+
+    public void initiatePasswordRecovery(String email){
+        var user = userService.findByEmail(email);
+        if(user == null) {
+            throw new UserNotFoundException();
+        }
+        String token = jwtService.generateToken(user, user.getId());
+        String recoveryUrl = "http://localhost:3000/password/reset" + "?token=" + token;
+        String subject = "Recuperação de senha";
+        String message = "Olá" + user.getName() + ",\n\n" +
+        "Você solicitou a recuperação de senha. Para criar uma nova senha clique no link abaixo: \n"
+                + recoveryUrl + "\n\n" +
+                "Caso você não tenha solicitado a recuperação de senha, ignore este e-mail \n\n"
+                + "Atenciosamente, \n" +
+                "Equipe Luminous";
+        emailService.sendEmail(user.getEmail(), subject, message);
+    }
+
+    public void resetPassword(String token, String newPassword, String userEmail){
+        var user = userService.findByEmail(userEmail);
+        var passwordResetToken = jwtService.isTokenValid(token, user);
+        if(passwordResetToken){
+            userService.resetUserPassword(user, newPassword);
+            String subject = "Senha Redefinida";
+            String message = "Olá " + user.getName() + ", \n\n" +
+                    "Sua senha foi redefinida com sucesso. \n\n" +
+                    "Atenciosamente, \n" +
+                    "Equipe Luminous";
+            emailService.sendEmail(user.getEmail(), subject, message);
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 }

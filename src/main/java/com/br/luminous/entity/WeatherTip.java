@@ -4,10 +4,12 @@ import com.br.luminous.enums.ClimateType;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
-@Table(name = "weather_tips")
-public class WeatherTips {
+@Table(name = "weather_tip")
+public class WeatherTip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -16,4 +18,7 @@ public class WeatherTips {
 
     @Enumerated(EnumType.STRING)
     private ClimateType climate;
+
+    @ManyToMany(mappedBy="weatherTips")
+    private List<User> users;
 }

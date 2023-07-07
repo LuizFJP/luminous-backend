@@ -1,11 +1,15 @@
 package com.br.luminous.controller;
 
 import com.br.luminous.entity.Address;
+import com.br.luminous.models.AddressRequest;
+import com.br.luminous.models.AddressResponse;
 import com.br.luminous.service.AddressService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -14,15 +18,39 @@ public class AddressController {
 
     private AddressService addressService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public ResponseEntity<String> teste() {
-        return new ResponseEntity<String>("Deu certo", HttpStatus.CREATED);
+    @GetMapping("/user/{userId}")
+    public List<Address> getAddressesOfUser(@PathVariable Long userId) {
+        return addressService.getAddressByUserId(userId);
     }
 
-    @PostMapping
-    public ResponseEntity<Long> createAddress(@RequestBody Address address){
-        Long id = addressService.create(address);
-        return new ResponseEntity<Long>(id, HttpStatus.CREATED);
+
+    @PostMapping("/user/{id}")
+    public ResponseEntity<Long> createAddress(@PathVariable Long id, @RequestBody AddressRequest address){
+        Long response = addressService.create(id, address);
+        return new ResponseEntity<Long>(response, HttpStatus.CREATED);
+    }
+
+    @PutMapping("{id}/user/{userId}")
+    public ResponseEntity<AddressResponse> updateAddressesOfUser(@PathVariable Long userId, @PathVariable Long id, @RequestBody AddressRequest address) {
+        addressService.update(userId, id, address);
+        return new ResponseEntity(address, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}/user/{userId}")
+    public ResponseEntity<AddressResponse> deleteAddressesOfUser(@PathVariable Long userId, @PathVariable Long id) {
+        addressService.delete(userId, id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{userId}/main")
+    public Address getMainAddress(@PathVariable Long userId){
+        return addressService.getMainAddress(userId);
+    }
+
+    @GetMapping("/{addressId}")
+    public ResponseEntity<Address> getAddress(@PathVariable Long addressId){
+        var RequestedAddress = addressService.getAddressById(addressId);
+        return new ResponseEntity<>(RequestedAddress, HttpStatus.OK);
     }
 
 }

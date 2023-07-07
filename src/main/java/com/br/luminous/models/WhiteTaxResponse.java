@@ -1,5 +1,6 @@
-package com.br.luminous.DTO;
+package com.br.luminous.models;
 
+import com.br.luminous.entity.EnergyProvider;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
@@ -9,13 +10,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class WhiteTaxDTO {
-    private String companyName;
-    @Column(name = "regular_price")
+@AllArgsConstructor
+public class WhiteTaxResponse {
     private float regularPrice;
-    @Column(name = "low_price")
     private float lowPrice;
     private float middlePrice;
     private float highPrice;
@@ -37,4 +35,5 @@ public class WhiteTaxDTO {
     private LocalTime endHourHighPrice;
     @JsonFormat(pattern="HH:mm")
     private float save;
+    private EnergyProvider energyProvider;
 }
