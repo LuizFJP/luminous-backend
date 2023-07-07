@@ -4,9 +4,7 @@ import com.br.luminous.service.BillFileService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,6 +22,14 @@ public class BillFileController {
             return ResponseEntity.status(HttpStatus.CREATED).body(id);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading file.");
+        }
+    }
+    @GetMapping("/download/{energyBillId}")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable("energyBillId") Long energyBillId) {
+        try{
+            return billFileService.downloadBillFile(energyBillId);
+        }catch (IOException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

@@ -16,7 +16,7 @@ public interface ConsumptionRepository extends JpaRepository<Consumption, Long> 
                     "on device.id = consumption.device_id " +
                     "inner join address " +
                     "on (:addressId) = device.address_id " +
-                    "WHERE consumption.period >= (select * from vw_last_restart_day);")
+                    "WHERE consumption.period >= (2023-06-10);")
     List<TrackProjection> getCurrentConsumption(Long addressId);
 
 }
